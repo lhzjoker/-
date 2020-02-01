@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>springboot连接jdbc | 阿华</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="springboot连接jdbc数据库并且整合Druid数据源目录 1.连接jdbc数据库 1.导入相关依赖 2.配置数据库连接信息 3.测试连接 4.数据库查询数据返回网页   1.整合Druid数据源 1.导入依赖 2.配置信息 3.测试类查看使用的数据源 4.编写一个Druid配置类">
+  <meta name="description" content="springboot连接jdbc数据库并且整合Druid数据源">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springboot连接jdbc">
 <meta property="og:url" content="http://yoursite.com/2020/01/13/springboot%E8%BF%9E%E6%8E%A5jdbc/index.html">
 <meta property="og:site_name" content="阿华">
-<meta property="og:description" content="springboot连接jdbc数据库并且整合Druid数据源目录 1.连接jdbc数据库 1.导入相关依赖 2.配置数据库连接信息 3.测试连接 4.数据库查询数据返回网页   1.整合Druid数据源 1.导入依赖 2.配置信息 3.测试类查看使用的数据源 4.编写一个Druid配置类">
+<meta property="og:description" content="springboot连接jdbc数据库并且整合Druid数据源">
 <meta property="og:image" content="http://yoursite.com/images/QQ%E5%9B%BE%E7%89%8720191229203148.png">
 <meta property="article:published_time" content="2020-01-13T15:51:58.911Z">
-<meta property="article:modified_time" content="2020-02-01T09:29:54.933Z">
+<meta property="article:modified_time" content="2020-02-01T10:07:32.636Z">
 <meta property="article:author" content="叫我阿华就好了">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/QQ%E5%9B%BE%E7%89%8720191229203148.png">
@@ -171,7 +171,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="springboot连接jdbc数据库并且整合Druid数据源"><a href="#springboot连接jdbc数据库并且整合Druid数据源" class="headerlink" title="springboot连接jdbc数据库并且整合Druid数据源"></a>springboot连接jdbc数据库并且整合Druid数据源</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+        <h1 id="springboot连接jdbc数据库并且整合Druid数据源"><a href="#springboot连接jdbc数据库并且整合Druid数据源" class="headerlink" title="springboot连接jdbc数据库并且整合Druid数据源"></a>springboot连接jdbc数据库并且整合Druid数据源</h1><a id="more"></a>
+
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>1.<a href="#连接jdbc数据库">连接jdbc数据库</a><ul>
 <li>1.<a href="#导入相关依赖">导入相关依赖</a></li>
 <li>2.<a href="#配置数据库连接信息">配置数据库连接信息</a></li>
@@ -187,10 +189,6 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
-
-
-
 <h1 id="连接jdbc数据库"><a href="#连接jdbc数据库" class="headerlink" title="连接jdbc数据库"></a>连接jdbc数据库</h1><h2 id="导入相关依赖"><a href="#导入相关依赖" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h2><pre><code>&lt;!--导入jdbc相关依赖--&gt;
     &lt;dependency&gt;
       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
