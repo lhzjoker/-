@@ -185,162 +185,25 @@
 </ul>
 </li>
 </ul>
-<h1 id="连接jdbc数据库"><a href="#连接jdbc数据库" class="headerlink" title="连接jdbc数据库"></a>连接jdbc数据库</h1><h2 id="导入相关依赖"><a href="#导入相关依赖" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h2><pre><code>&lt;!--导入jdbc相关依赖--&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
-      &lt;version&gt;2.1.1&lt;/version&gt;
-    &lt;/dependency&gt;
+<h1 id="连接jdbc数据库"><a href="#连接jdbc数据库" class="headerlink" title="连接jdbc数据库"></a>连接jdbc数据库</h1><h2 id="导入相关依赖"><a href="#导入相关依赖" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">    &lt;!--导入jdbc相关依赖--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;2.1.1&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">          &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">``` </span><br><span class="line">        </span><br><span class="line"><span class="comment">## 配置数据库连接信息  </span></span><br><span class="line"></span><br><span class="line">* application.yml</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">    spring:</span><br><span class="line">      datasource:</span><br><span class="line">        username: root</span><br><span class="line">        password: 数据库密码</span><br><span class="line">        url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC</span><br><span class="line">        driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">```        </span><br><span class="line">        </span><br><span class="line"><span class="comment">## 测试连接</span></span><br><span class="line"></span><br><span class="line">* 在测试类中测试</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line">    @SpringBootTest</span><br><span class="line">    class SpringBootData06JdbcApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">      @Autowired</span><br><span class="line">      DataSource dataSource;</span><br><span class="line"></span><br><span class="line">      //测试连接数据库</span><br><span class="line">      @Test</span><br><span class="line">      void contextLoads() throws SQLException &#123;</span><br><span class="line">        System.out.println(dataSource.getClass());</span><br><span class="line">        Connection connection = dataSource.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-    &lt;dependency&gt;
-      &lt;groupId&gt;mysql&lt;/groupId&gt;
-      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-      &lt;scope&gt;runtime&lt;/scope&gt;
-    &lt;/dependency&gt;</code></pre><h2 id="配置数据库连接信息"><a href="#配置数据库连接信息" class="headerlink" title="配置数据库连接信息"></a>配置数据库连接信息</h2><ul>
-<li><p>application.yml</p>
-<p>  spring:</p>
-<pre><code>datasource:
-  username: root
-  password: 数据库密码
-  url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC
-  driver-class-name: com.mysql.cj.jdbc.Driver</code></pre></li>
-</ul>
-<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><ul>
-<li><p>在测试类中测试</p>
-<p>  @SpringBootTest<br>  class SpringBootData06JdbcApplicationTests {</p>
-<pre><code>@Autowired
-DataSource dataSource;
-
-//测试连接数据库
-@Test
-void contextLoads() throws SQLException {
-  System.out.println(dataSource.getClass());
-  Connection connection = dataSource.getConnection();
-  System.out.println(connection);
-}</code></pre><p>  }</p>
-</li>
-<li><p>springboot默认是使用com.zaxxer.hikari.HikariDataSource作为数据源，</p>
-</li>
+<ul>
+<li>springboot默认是使用com.zaxxer.hikari.HikariDataSource作为数据源，</li>
 </ul>
 <p>2.0以下是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；</p>
-<pre><code>如果出现com.zaxxer.hikari.HikariDataSource则表示连接成功</code></pre><h2 id="数据库查询数据返回网页"><a href="#数据库查询数据返回网页" class="headerlink" title="数据库查询数据返回网页"></a>数据库查询数据返回网页</h2><pre><code>@RestController
-public class JdbcController {
-
-    //查询数据库的数据返回网页
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @GetMapping(&quot;/query&quot;)
-    public Map&lt;String,Object&gt; map(){
-        List&lt;Map&lt;String, Object&gt;&gt; list = jdbcTemplate.queryForList(&quot;SELECT * from department&quot;);
-        return list.get(0);
-    }
-}</code></pre><p><a href="http://localhost:8080/query" target="_blank" rel="noopener">查询</a>  </p>
+<pre><code>如果出现com.zaxxer.hikari.HikariDataSource则表示连接成功</code></pre><h2 id="数据库查询数据返回网页"><a href="#数据库查询数据返回网页" class="headerlink" title="数据库查询数据返回网页"></a>数据库查询数据返回网页</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class JdbcController &#123;</span><br><span class="line"></span><br><span class="line">    //查询数据库的数据返回网页</span><br><span class="line">    @Autowired</span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    @GetMapping(<span class="string">"/query"</span>)</span><br><span class="line">    public Map&lt;String,Object&gt; <span class="function"><span class="title">map</span></span>()&#123;</span><br><span class="line">        List&lt;Map&lt;String, Object&gt;&gt; list = jdbcTemplate.queryForList(<span class="string">"SELECT * from department"</span>);</span><br><span class="line">        <span class="built_in">return</span> list.get(0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://localhost:8080/query" target="_blank" rel="noopener">查询</a>  </p>
 <h1 id="整合Druid数据源"><a href="#整合Druid数据源" class="headerlink" title="整合Druid数据源"></a>整合Druid数据源</h1><h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><ul>
-<li><p>在springboot项目中导入druid数据源依赖<a href="https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter" target="_blank" rel="noopener">点击查询最新依赖</a></p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
-    &lt;version&gt;1.1.20&lt;/version&gt;
-&lt;/dependency&gt;</code></pre></li>
+<li>在springboot项目中导入druid数据源依赖<a href="https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter" target="_blank" rel="noopener">点击查询最新依赖</a></li>
 </ul>
-<h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2><ul>
-<li><p>application.yml</p>
-<pre><code>#jdbc的配置
-spring:
-  datasource:
-    password: 980508
-    username: root
-    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    initialization-mode: always
-    #整合Druid数据源
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      # 连接池配置
-      # 配置初始化大小、最小、最大
-      initial-size: 1
-      min-idle: 1
-      max-active: 20
-      # 配置获取连接等待超时的时间
-      max-wait: 3000
-      validation-query: SELECT 1 FROM DUAL
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      pool-prepared-statements: true
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      filters: stat,wall,slf4j
-      # 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-        exclusions: &quot;*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*&quot;
-      stat-view-servlet:
-        enabled: true
-        url-pattern: /druid/*
-        login-username: lihuazhou
-        login-password: 980508
-        allow: 192.168.182.1</code></pre></li>
-</ul>
-<h2 id="测试类查看使用的数据源"><a href="#测试类查看使用的数据源" class="headerlink" title="测试类查看使用的数据源"></a>测试类查看使用的数据源</h2><pre><code>@SpringBootTest
-class SpringbootJdbcApplicationTests {
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.1.20&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">```        </span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置信息</span></span><br><span class="line"></span><br><span class="line">* application.yml</span><br><span class="line">``` bash</span><br><span class="line">        <span class="comment">#jdbc的配置</span></span><br><span class="line">        spring:</span><br><span class="line">          datasource:</span><br><span class="line">            password: 980508</span><br><span class="line">            username: root</span><br><span class="line">            url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&amp;useSSL=<span class="literal">false</span>&amp;useUnicode=<span class="literal">true</span>&amp;characterEncoding=utf8</span><br><span class="line">            driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">            initialization-mode: always</span><br><span class="line">            <span class="comment">#整合Druid数据源</span></span><br><span class="line">            <span class="built_in">type</span>: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">            druid:</span><br><span class="line">              <span class="comment"># 连接池配置</span></span><br><span class="line">              <span class="comment"># 配置初始化大小、最小、最大</span></span><br><span class="line">              initial-size: 1</span><br><span class="line">              min-idle: 1</span><br><span class="line">              max-active: 20</span><br><span class="line">              <span class="comment"># 配置获取连接等待超时的时间</span></span><br><span class="line">              max-wait: 3000</span><br><span class="line">              validation-query: SELECT 1 FROM DUAL</span><br><span class="line">              <span class="built_in">test</span>-on-borrow: <span class="literal">false</span></span><br><span class="line">              <span class="built_in">test</span>-on-return: <span class="literal">false</span></span><br><span class="line">              <span class="built_in">test</span>-while-idle: <span class="literal">true</span></span><br><span class="line">              pool-prepared-statements: <span class="literal">true</span></span><br><span class="line">              time-between-eviction-runs-millis: 60000</span><br><span class="line">              min-evictable-idle-time-millis: 300000</span><br><span class="line">              filters: <span class="built_in">stat</span>,wall,slf4j</span><br><span class="line">              <span class="comment"># 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配</span></span><br><span class="line">              web-stat-filter:</span><br><span class="line">                enabled: <span class="literal">true</span></span><br><span class="line">                url-pattern: /*</span><br><span class="line">                exclusions: <span class="string">"*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"</span></span><br><span class="line">              <span class="built_in">stat</span>-view-servlet:</span><br><span class="line">                enabled: <span class="literal">true</span></span><br><span class="line">                url-pattern: /druid/*</span><br><span class="line">                login-username: lihuazhou</span><br><span class="line">                login-password: 980508</span><br><span class="line">                allow: 192.168.182.1</span><br></pre></td></tr></table></figure>
 
-    @Autowired
-    private DataSource dataSource;
+<h2 id="测试类查看使用的数据源"><a href="#测试类查看使用的数据源" class="headerlink" title="测试类查看使用的数据源"></a>测试类查看使用的数据源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">        @SpringBootTest</span><br><span class="line">        class SpringbootJdbcApplicationTests &#123;</span><br><span class="line"></span><br><span class="line">            @Autowired</span><br><span class="line">            private DataSource dataSource;</span><br><span class="line"></span><br><span class="line">            @Test</span><br><span class="line">            void contextLoads() throws SQLException &#123;</span><br><span class="line">                System.out.println(dataSource.getClass());</span><br><span class="line">                System.out.println(dataSource.getConnection());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">```        </span><br><span class="line">        </span><br><span class="line"><span class="comment">## 编写一个Druid配置类   </span></span><br><span class="line"></span><br><span class="line">* DruidConfig</span><br><span class="line"></span><br><span class="line">* 需要把配置信息从application.yml中加入到容器中</span><br><span class="line">``` bash</span><br><span class="line">        @ConfigurationProperties(prefix = <span class="string">"spring.datasource"</span>)</span><br><span class="line">                @Bean</span><br><span class="line">                public DataSource <span class="function"><span class="title">druid</span></span>()&#123;</span><br><span class="line">                    <span class="built_in">return</span>  new DruidDataSource();</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
 
-    @Test
-    void contextLoads() throws SQLException {
-        System.out.println(dataSource.getClass());
-        System.out.println(dataSource.getConnection());
-    }
-
-}</code></pre><h2 id="编写一个Druid配置类"><a href="#编写一个Druid配置类" class="headerlink" title="编写一个Druid配置类"></a>编写一个Druid配置类</h2><ul>
-<li><p>DruidConfig</p>
-</li>
-<li><p>需要把配置信息从application.yml中加入到容器中</p>
-<pre><code>@ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
-        @Bean
-        public DataSource druid(){
-            return  new DruidDataSource();
-        }</code></pre></li>
+<ul>
 <li><p>配置一个Servelet容器来管理后台（Druid的监控）</p>
-<pre><code>@Bean
-public ServletRegistrationBean statViewServlet(){
-    ServletRegistrationBean bean=new ServletRegistrationBean(new StatViewServlet(),&quot;/druid/*&quot;); //druid后台的路径
-    Map&lt;String,String&gt; initParams =new HashMap&lt;&gt;();
-
-    initParams.put(&quot;loginUsername&quot;,&quot;lihuazhou&quot;);
-    initParams.put(&quot;loginPassword&quot;,&quot;980508&quot;);
-    initParams.put(&quot;allow&quot;,&quot;&quot;);//可以设置为localhost下才能访问，默认是所有都可以访问
-    initParams.put(&quot;deny&quot;,&quot;&quot;);//默认是不禁用路径
-    bean.setInitParameters(initParams);
-    return bean;
-}</code></pre></li>
-<li><p>配置一个web监控的Filter（拦截一些操作，有点类似拦截器）</p>
-<pre><code>  @Bean
-  public FilterRegistrationBean webStatFilter(){
-      FilterRegistrationBean bean = new FilterRegistrationBean();
-      bean.setFilter(new WebStatFilter());
-
-      Map&lt;String,String&gt; initParams = new HashMap&lt;&gt;();
-      initParams.put(&quot;exclusions&quot;,&quot;*.js,*.css,/druid/*&quot;);     //除了这些操作的数据，其他都会被拦截
-
-      bean.setInitParameters(initParams);
-
-      bean.setUrlPatterns(Arrays.asList(&quot;/*&quot;));
-
-    return  bean;
-}</code></pre></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">        @Bean</span><br><span class="line">        public ServletRegistrationBean <span class="function"><span class="title">statViewServlet</span></span>()&#123;</span><br><span class="line">            ServletRegistrationBean bean=new ServletRegistrationBean(new StatViewServlet(),<span class="string">"/druid/*"</span>); //druid后台的路径</span><br><span class="line">            Map&lt;String,String&gt; initParams =new HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">            initParams.put(<span class="string">"loginUsername"</span>,<span class="string">"lihuazhou"</span>);</span><br><span class="line">            initParams.put(<span class="string">"loginPassword"</span>,<span class="string">"980508"</span>);</span><br><span class="line">            initParams.put(<span class="string">"allow"</span>,<span class="string">""</span>);//可以设置为localhost下才能访问，默认是所有都可以访问</span><br><span class="line">            initParams.put(<span class="string">"deny"</span>,<span class="string">""</span>);//默认是不禁用路径</span><br><span class="line">            bean.setInitParameters(initParams);</span><br><span class="line">            <span class="built_in">return</span> bean;</span><br><span class="line">        &#125;</span><br><span class="line">```       </span><br><span class="line">        </span><br><span class="line">* 配置一个web监控的Filter（拦截一些操作，有点类似拦截器）</span><br><span class="line"></span><br><span class="line">``` bash        </span><br><span class="line">          @Bean</span><br><span class="line">          public FilterRegistrationBean <span class="function"><span class="title">webStatFilter</span></span>()&#123;</span><br><span class="line">              FilterRegistrationBean bean = new FilterRegistrationBean();</span><br><span class="line">              bean.setFilter(new WebStatFilter());</span><br><span class="line"></span><br><span class="line">              Map&lt;String,String&gt; initParams = new HashMap&lt;&gt;();</span><br><span class="line">              initParams.put(<span class="string">"exclusions"</span>,<span class="string">"*.js,*.css,/druid/*"</span>);     //除了这些操作的数据，其他都会被拦截</span><br><span class="line"></span><br><span class="line">              bean.setInitParameters(initParams);</span><br><span class="line"></span><br><span class="line">              bean.setUrlPatterns(Arrays.asList(<span class="string">"/*"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="built_in">return</span>  bean;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>Druid页面<br><img src="https://github.com/lhzjoker/images/raw/master/img-store/QQ%E5%9B%BE%E7%89%8720191229203148.png" alt="">  </p>
 </li>
 </ul>
