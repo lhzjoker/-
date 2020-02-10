@@ -6,14 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 阿华</title>
+  <title>springboot高级缓存cache | 阿华</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生有限，但你的自传是无限的">
-<meta property="og:type" content="website">
-<meta property="og:title" content="阿华">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="springboot高级cache目录 1.springboot缓存 1.jsr107缓存规范 2.spring的缓存抽象 3.整合项目 1.导入相关配置 2.配置文件 3.创建bean实例 4.创建mapper接口映射数据库 5.添加注解 6.编写service来具体实现mapper中的方法 7.编写controller测试 8.测试结果   4.整合redis 1.准备 2.导入相关依赖 3.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot高级缓存cache">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98cache/index.html">
 <meta property="og:site_name" content="阿华">
-<meta property="og:description" content="人生有限，但你的自传是无限的">
+<meta property="og:description" content="springboot高级cache目录 1.springboot缓存 1.jsr107缓存规范 2.spring的缓存抽象 3.整合项目 1.导入相关配置 2.配置文件 3.创建bean实例 4.创建mapper接口映射数据库 5.添加注解 6.编写service来具体实现mapper中的方法 7.编写controller测试 8.测试结果   4.整合redis 1.准备 2.导入相关依赖 3.">
+<meta property="article:published_time" content="2020-02-10T12:48:48.310Z">
+<meta property="article:modified_time" content="2020-02-10T12:51:07.555Z">
 <meta property="article:author" content="叫我阿华就好了">
 <meta name="twitter:card" content="summary">
   
@@ -147,140 +149,477 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-springboot高级缓存cache" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      springboot高级缓存cache
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/10/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98cache/" class="archive-article-date">
+
+        
+        <a href="/2020/02/10/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98cache/" class="archive-article-date">
   	<time datetime="2020-02-10T12:48:48.310Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/10/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98cache/">springboot高级缓存cache</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/13/springboot%E8%BF%9E%E6%8E%A5jdbc/" class="archive-article-date">
-  	<time datetime="2020-01-13T15:51:58.911Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/13/springboot%E8%BF%9E%E6%8E%A5jdbc/">springboot连接jdbc</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <h1 id="springboot高级cache"><a href="#springboot高级cache" class="headerlink" title="springboot高级cache"></a>springboot高级cache</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#springboot缓存">springboot缓存</a><ul>
+<li>1.<a href="#jsr107缓存规范">jsr107缓存规范</a></li>
+<li>2.<a href="#spring的缓存抽象">spring的缓存抽象</a></li>
+<li>3.<a href="#整合项目">整合项目</a><ul>
+<li>1.<a href="#导入相关配置">导入相关配置</a></li>
+<li>2.<a href="#配置文件">配置文件</a></li>
+<li>3.<a href="#创建bean实例">创建bean实例</a></li>
+<li>4.<a href="#创建mapper接口映射数据库">创建mapper接口映射数据库</a></li>
+<li>5.<a href="#添加注解">添加注解</a></li>
+<li>6.<a href="#编写service来具体实现mapper中的方法">编写service来具体实现mapper中的方法</a></li>
+<li>7.<a href="#编写controller测试">编写controller测试</a></li>
+<li>8.<a href="#测试结果">测试结果</a></li>
+</ul>
+</li>
+<li>4.<a href="#整合redis">整合redis</a><ul>
+<li>1.<a href="#准备">准备</a></li>
+<li>2.<a href="#导入相关依赖">导入相关依赖</a></li>
+<li>3.<a href="#配置信息">配置信息</a></li>
+<li>4.<a href="#测试redis">测试redis</a></li>
+<li>5.<a href="#序列化">序列化</a></li>
+<li>6.<a href="#自定义Cachemanager">自定义Cachemanager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="springboot缓存"><a href="#springboot缓存" class="headerlink" title="springboot缓存"></a>springboot缓存</h1><p>缓存的场景</p>
+<ul>
+<li>临时性数据存储【校验码】</li>
+<li>避免频繁因为相同的内容查询数据库【查询的信息】</li>
+</ul>
+<h2 id="jsr107缓存规范"><a href="#jsr107缓存规范" class="headerlink" title="jsr107缓存规范"></a>jsr107缓存规范</h2><blockquote>
+<p>用的比较少</p>
+</blockquote>
+<p>Java Caching定义了5个核心接口</p>
+<ul>
+<li><p>CachingProvider</p>
+<p>定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期间访问多个CachingProvider</p>
+</li>
+<li><p>CacheManager</p>
+<p>定义了创建、配置、获取、管理和控制多个唯一命名的Cache,这些Cache存在于CacheManage的上下文中，一个CacheManage只被一个CachingProvider拥有</p>
+</li>
+<li><p>Cache</p>
+<p>类似于Map的数据结构并临时储存以key为索引的值，一个Cache仅仅被一个CacheManage所拥有</p>
+</li>
+<li><p>Entry</p>
+<p>存储在Cache中的key-value对</p>
+</li>
+<li><p>Expiry</p>
+<p>存储在Cache的条目有一个定义的有效期，一旦超过这个时间，就会设置过期的状态，过期无法被访问，更新，删除。缓存的有效期可以通过ExpiryPolicy设置。</p>
+</li>
+</ul>
+<h2 id="spring的缓存抽象"><a href="#spring的缓存抽象" class="headerlink" title="spring的缓存抽象"></a>spring的缓存抽象</h2><p>包括一些JSR107的注解</p>
+<p>CahceManager</p>
+<p>Cache</p>
+<h3 id="1、基本概念"><a href="#1、基本概念" class="headerlink" title="1、基本概念"></a>1、基本概念</h3><p><strong>重要的概念&amp;缓存注解</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cache</td>
+<td align="left">缓存接口，定义缓存操作，实现有：RedisCache、EhCacheCache、ConcurrentMapCache等</td>
+</tr>
+<tr>
+<td>CacheManager</td>
+<td align="left">缓存管理器，管理各种缓存（Cache）组件</td>
+</tr>
+<tr>
+<td>@Cacheable</td>
+<td align="left">针对方法配置，根据方法的请求参数对其结果进行缓存</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td align="left">清空缓存</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td align="left">保证方法被调用，又希望结果被缓存 update，调用，将信息更新缓存</td>
+</tr>
+<tr>
+<td>@EnableCaching</td>
+<td align="left">开启基于注解的缓存</td>
+</tr>
+<tr>
+<td>KeyGenerator</td>
+<td align="left">缓存数据时key生成的策略</td>
+</tr>
+<tr>
+<td>serialize</td>
+<td align="left">缓存数据时value序列化策略</td>
+</tr>
+</tbody></table>
+<h2 id="整合项目"><a href="#整合项目" class="headerlink" title="整合项目"></a>整合项目</h2><p>springboot 2.2.3+web+mysql+mybatis+cache</p>
+<h3 id="导入相关配置"><a href="#导入相关配置" class="headerlink" title="导入相关配置"></a>导入相关配置</h3><pre><code>&lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;2.1.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.1.20&lt;/version&gt;
+        &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>application.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">        datasource:</span><br><span class="line">          username: root</span><br><span class="line">          password: 980508</span><br><span class="line">          url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;spring-cache?serverTimezone&#x3D;UTC</span><br><span class="line">          driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">          initialization-mode: always</span><br><span class="line"></span><br><span class="line">#开启驼峰命名法</span><br><span class="line">mybatis:</span><br><span class="line">  configuration:</span><br><span class="line">    map-underscore-to-camel-case: true</span><br></pre></td></tr></table></figure>
+
+<p>application.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 开启日志，打印sql语句</span><br><span class="line">logging.level.com.atguigu.mapper &#x3D; debug</span><br><span class="line"># 打印配置报告</span><br><span class="line">debug&#x3D;true</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建bean实例"><a href="#创建bean实例" class="headerlink" title="创建bean实例"></a>创建bean实例</h3><p>Department</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.bean;</span><br><span class="line"></span><br><span class="line">public class Department &#123;</span><br><span class="line">	</span><br><span class="line">	private Integer id;</span><br><span class="line">	private String departmentName;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	public Department() &#123;</span><br><span class="line">		super();</span><br><span class="line">		&#x2F;&#x2F; TODO Auto-generated constructor stub</span><br><span class="line">	&#125;</span><br><span class="line">	public Department(Integer id, String departmentName) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">		this.departmentName &#x3D; departmentName;</span><br><span class="line">	&#125;</span><br><span class="line">	public Integer getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setId(Integer id) &#123;</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getDepartmentName() &#123;</span><br><span class="line">		return departmentName;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setDepartmentName(String departmentName) &#123;</span><br><span class="line">		this.departmentName &#x3D; departmentName;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Department [id&#x3D;&quot; + id + &quot;, departmentName&#x3D;&quot; + departmentName + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Employee</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.bean;</span><br><span class="line"></span><br><span class="line">public class Employee &#123;</span><br><span class="line">	</span><br><span class="line">	private Integer id;</span><br><span class="line">	private String lastName;</span><br><span class="line">	private String email;</span><br><span class="line">	private Integer gender; &#x2F;&#x2F;性别 1男  0女</span><br><span class="line">	private Integer dId;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	public Employee() &#123;</span><br><span class="line">		super();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	public Employee(Integer id, String lastName, String email, Integer gender, Integer dId) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">		this.lastName &#x3D; lastName;</span><br><span class="line">		this.email &#x3D; email;</span><br><span class="line">		this.gender &#x3D; gender;</span><br><span class="line">		this.dId &#x3D; dId;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Integer getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setId(Integer id) &#123;</span><br><span class="line">		this.id &#x3D; id;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getLastName() &#123;</span><br><span class="line">		return lastName;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setLastName(String lastName) &#123;</span><br><span class="line">		this.lastName &#x3D; lastName;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getEmail() &#123;</span><br><span class="line">		return email;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setEmail(String email) &#123;</span><br><span class="line">		this.email &#x3D; email;</span><br><span class="line">	&#125;</span><br><span class="line">	public Integer getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setGender(Integer gender) &#123;</span><br><span class="line">		this.gender &#x3D; gender;</span><br><span class="line">	&#125;</span><br><span class="line">	public Integer getdId() &#123;</span><br><span class="line">		return dId;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setdId(Integer dId) &#123;</span><br><span class="line">		this.dId &#x3D; dId;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Employee [id&#x3D;&quot; + id + &quot;, lastName&#x3D;&quot; + lastName + &quot;, email&#x3D;&quot; + email + &quot;, gender&#x3D;&quot; + gender + &quot;, dId&#x3D;&quot;</span><br><span class="line">				+ dId + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建mapper接口映射数据库"><a href="#创建mapper接口映射数据库" class="headerlink" title="创建mapper接口映射数据库"></a>创建mapper接口映射数据库</h3><p>DepartmentMapper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.mapper;</span><br><span class="line"></span><br><span class="line">import com.atguigu.bean.Department;</span><br><span class="line">import org.apache.ibatis.annotations.Delete;</span><br><span class="line">import org.apache.ibatis.annotations.Insert;</span><br><span class="line">import org.apache.ibatis.annotations.Select;</span><br><span class="line">import org.apache.ibatis.annotations.Update;</span><br><span class="line"></span><br><span class="line">public interface DepartmentMapper &#123;</span><br><span class="line">    @Select(&quot;select * from department where id &#x3D; #&#123;id&#125;&quot;)</span><br><span class="line">    public Department getDepById(Integer id);</span><br><span class="line"></span><br><span class="line">    @Update(&quot;update department set departmentName&#x3D;#&#123;departmentName&#125; where id&#x3D;#&#123;id&#125;&quot;)</span><br><span class="line">    public void updateDep(Department department);</span><br><span class="line"></span><br><span class="line">    @Delete(&quot;delete from department where id&#x3D;#&#123;id&#125;&quot;)</span><br><span class="line">    public void deleteDepById(Integer id);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;insert into department (departmentName)values(#&#123;departmentName&#125;)&quot;)</span><br><span class="line">    public void insertDep(Department department);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>EmployeeMapper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package com.atguigu.mapper;</span><br><span class="line"></span><br><span class="line">import com.atguigu.bean.Employee;</span><br><span class="line">import org.apache.ibatis.annotations.Delete;</span><br><span class="line">import org.apache.ibatis.annotations.Insert;</span><br><span class="line">import org.apache.ibatis.annotations.Select;</span><br><span class="line">import org.apache.ibatis.annotations.Update;</span><br><span class="line"></span><br><span class="line">public interface EmployeeMapper &#123;</span><br><span class="line">    @Select(&quot;select * from Employee where id &#x3D; #&#123;id&#125;&quot;)</span><br><span class="line">    public Employee getEmpById(Integer id);</span><br><span class="line"></span><br><span class="line">    @Update(&quot; update Employee set lastName&#x3D;#&#123;lastName&#125;,email&#x3D;#&#123;email&#125;,gender&#x3D;#&#123;gender&#125;,d_id&#x3D;#&#123;dId&#125; where id&#x3D;#&#123;id&#125;&quot;)</span><br><span class="line">    public void updateEmp(Employee employee);</span><br><span class="line"></span><br><span class="line">    @Delete(&quot;delete form Employee where id&#x3D;#&#123;id&#125;&quot;)</span><br><span class="line">    public void deleteEmpById(Integer id);</span><br><span class="line"></span><br><span class="line">    @Insert(&quot;insert into Employee(lastName,email,gender,d_id)values(#&#123;lastName&#125;,#&#123;email&#125;,#&#123;gender&#125;,#&#123;dId&#125;)&quot;)</span><br><span class="line">    public void insertEmp(Employee employee);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    @Select(&quot;select * from Employee where lastName &#x3D; #&#123;lastName&#125;&quot;)</span><br><span class="line">    public Employee getEmpByLastName(String lastName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加注解"><a href="#添加注解" class="headerlink" title="添加注解"></a>添加注解</h3><p>主程序添加注解MapperScan，并且使用@EnableCaching开启缓存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@EnableCaching</span><br><span class="line">@MapperScan(&quot;com.atguigu.mapper&quot;)</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringBoot01CacheApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(SpringBoot01CacheApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写service来具体实现mapper中的方法"><a href="#编写service来具体实现mapper中的方法" class="headerlink" title="编写service来具体实现mapper中的方法"></a>编写service来具体实现mapper中的方法</h3><p>将方法的运行结果进行缓存，以后要是再有相同的数据，直接从缓存中获取，不用调用方法</p>
+<p> CacheManager中管理多个Cache组件，对缓存的真正CRUD操作在Cache组件中，每个缓存组件都有自己的唯一名字；</p>
+<p> 属性：</p>
+<ul>
+<li>CacheName/value:指定存储缓存组件的名字</li>
+<li>key:缓存数据使用的key,可以使用它来指定。默认是使用方法参数的值，1-方法的返回值</li>
+<li>编写Spel表达式：#id 参数id的值， #a0/#p0 #root.args[0]</li>
+<li>keyGenerator:key的生成器，自己可以指定key的生成器的组件id</li>
+<li>key/keyGendertor二选一使用</li>
+<li>cacheManager指定Cache管理器，或者cacheReslover指定获取解析器</li>
+<li>condition:指定符合条件的情况下，才缓存； ex:condition = “#id&gt;0”</li>
+<li>unless：否定缓存，unless指定的条件为true，方法的返回值就不会被缓存，可以获取到结果进行判断  ;  ex:unless = “#result == null”</li>
+<li>sync:是否使用异步模式，unless不支持</li>
+</ul>
+<h4 id="各种注解的使用"><a href="#各种注解的使用" class="headerlink" title="各种注解的使用"></a>各种注解的使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class EmployeeService &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    EmployeeMapper employeeMapper;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * cacheName：  指定缓存组件的名字，也可以用value来表示</span><br><span class="line">     * key: #id表示id的值作为key   还有另一种keyGenerator:key的生成器，自己可以指定key的生成器的组件id,自己了解，这里就不演示了</span><br><span class="line">     * condition： 符合条件下，才缓存，这里表示id&gt;1才缓存</span><br><span class="line">     * unless:  符合条件下，不缓存，这里表示id&#x3D;&#x3D;0则不缓存</span><br><span class="line">     * @param id</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Cacheable(cacheNames &#x3D; &quot;emp&quot;,key &#x3D; &quot;#id&quot;,condition &#x3D; &quot;#id&gt;1&quot;,unless &#x3D; &quot;#id&#x3D;&#x3D;0&quot;)</span><br><span class="line">    public Employee getEmp(Integer id)&#123;</span><br><span class="line">        System.out.println(&quot;查询&quot;+id+&quot;号员工&quot;);</span><br><span class="line">        Employee employee&#x3D;employeeMapper.getEmpById(id);</span><br><span class="line">        return employee;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">     &#x2F;**</span><br><span class="line">     *@CachePut：既调用方法，又更新缓存</span><br><span class="line">     * 修改了数据库的某个数据，同时又更新了缓存</span><br><span class="line">     * 运行时机：（与Cacheable相反）</span><br><span class="line">     *      1.先调用目标方法</span><br><span class="line">     *      2.将目标方法缓存起来</span><br><span class="line">     *</span><br><span class="line">     * 测试步骤</span><br><span class="line">     * 1.查询1号员工，查询到的结果会放到缓存中</span><br><span class="line">     *          key：1   value：lastName：zhangsan</span><br><span class="line">     * 2.以后查询的结果还是之前的结果</span><br><span class="line">     * 3.更新1号员工</span><br><span class="line">     * 4.查询1号员工，应该是更新后的员工，key应该这样写</span><br><span class="line">     *      key&#x3D;&quot;#employee.id&quot;   使用传入参数的员工id</span><br><span class="line">     *      key&#x3D;&quot;#result.id&quot;     使用返回后的员工id</span><br><span class="line">     *      注：@Cacheable中不能写#result.id</span><br><span class="line">     * @param employee</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @CachePut(cacheNames &#x3D; &quot;emp&quot;,key &#x3D; &quot;#result.id&quot;)</span><br><span class="line">    public Employee updateEmp(Employee employee)&#123;</span><br><span class="line">        System.out.println(&quot;更新&quot;+employee.getId()+&quot;号员工&quot;);</span><br><span class="line">        employeeMapper.updateEmp(employee);</span><br><span class="line">        return employee;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">     &#x2F;**</span><br><span class="line">     * @CacheEvict：清除缓存（常用于删除之类的）</span><br><span class="line">     * key：指定清除的数据</span><br><span class="line">     * allEntries&#x3D;true：指定清除这个缓存中的所有数据，默认是false</span><br><span class="line">     * beforeInvocation &#x3D; false : 缓存的清除是否在方法之前清除，默认是false</span><br><span class="line">     *      默认是在方法之后清除（如果出现异常错误则不清除）</span><br><span class="line">     * beforeInvocation &#x3D; true ：缓存的清除在方法之前清除，不管是否出现异常都会清除</span><br><span class="line">     * @param id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @CacheEvict(cacheNames &#x3D; &quot;emp&quot;,key &#x3D; &quot;#id&quot;,beforeInvocation &#x3D; true)</span><br><span class="line">    public void deleteEmp(Integer id)&#123;</span><br><span class="line">        System.out.println(&quot;清除&quot;+id+&quot;号员工缓存&quot;);</span><br><span class="line">        &#x2F;&#x2F;employeeMapper.deleteEmpById(id);     &#x2F;&#x2F;同时删除数据库中的数据</span><br><span class="line">        int i&#x3D;10&#x2F;0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F;@Caching 定义复杂的缓存规则</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 这里通过查询lastName来测试</span><br><span class="line">     * 当查询lastName完之后，再通过id和email来查就不需要通过数据库了</span><br><span class="line">     * 但是通过lastName来查询还是需要通过数据库，因为CachePut注解的作用是先调用目标方法，方法必被执行</span><br><span class="line">     *</span><br><span class="line">     * 公共的配置可以通过@CacheConfig写在一起，标注在类前，比如配置cacheName</span><br><span class="line">     * @param lastName</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Caching(</span><br><span class="line">            cacheable &#x3D; &#123;</span><br><span class="line">                    @Cacheable(key &#x3D; &quot;#lastName&quot;)</span><br><span class="line">            &#125;,</span><br><span class="line">            put &#x3D; &#123;</span><br><span class="line">                    @CachePut(key &#x3D; &quot;#result.id&quot;),</span><br><span class="line">                    @CachePut(key &#x3D; &quot;#result.email&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">    )</span><br><span class="line">    public Employee getEmpByLastName(String lastName)&#123;</span><br><span class="line">        System.out.println(&quot;查询&quot;+lastName);</span><br><span class="line">        Employee emp &#x3D; employeeMapper.getEmpByLastName(lastName);</span><br><span class="line">        return emp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写controller测试"><a href="#编写controller测试" class="headerlink" title="编写controller测试"></a>编写controller测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class EmployeeController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    EmployeeService employeeService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;emp&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Employee getEmployee(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">        Employee emp &#x3D; employeeService.getEmp(id);</span><br><span class="line">        return emp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @GetMapping(&quot;&#x2F;emp&quot;)</span><br><span class="line">    public Employee updateEmployee(Employee employee)&#123;</span><br><span class="line">        Employee emp &#x3D; employeeService.updateEmp(employee);</span><br><span class="line">        return emp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @GetMapping(&quot;&#x2F;delemp&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public String deleteEmployee(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">        employeeService.deleteEmp(id);</span><br><span class="line">        return &quot;清除&quot;+id+&quot;号员工缓存成功&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @GetMapping(&quot;&#x2F;emp&#x2F;lastname&#x2F;&#123;lastName&#125;&quot;)</span><br><span class="line">    public Employee getEmpByLastName(@PathVariable(&quot;lastName&quot;) String lastName)&#123;</span><br><span class="line">        Employee emp&#x3D; employeeService.getEmpByLastName(lastName);</span><br><span class="line">        return emp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><p>第一次访问会查询数据库，继续访问缓存中取值</p>
+<h2 id="整合redis"><a href="#整合redis" class="headerlink" title="整合redis"></a>整合redis</h2><ul>
+<li>在上面的基础上加一部分东西</li>
+</ul>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>下载windows版本的压缩包 <a href="https://github.com/microsoftarchive/redis/releases" target="_blank" rel="noopener">链接</a></li>
+<li>下载RedisDesktopManager（一个桌面化的redis工具）</li>
+</ul>
+<h3 id="导入相关依赖"><a href="#导入相关依赖" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h3><pre><code>&lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre><h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><p>application.yml</p>
+<pre><code># REDIS (RedisProperties)
+# Redis数据库索引（默认为0）
+spring.redis.database=0
+# Redis服务器地址
+spring.redis.host=localhost
+# Redis服务器连接端口
+spring.redis.port=6379
+# Redis服务器连接密码（默认为空）
+#spring.redis.password=980508
+# 连接池最大连接数（使用负值表示没有限制）
+spring.redis.jedis.pool.max-active=8
+# 连接池最大阻塞等待时间（使用负值表示没有限制）
+spring.redis.jedis.pool.max-wait=-1
+# 连接池中的最大空闲连接
+spring.redis.jedis.pool.max-idle=8
+# 连接池中的最小空闲连接
+spring.redis.jedis.pool.min-idle=0</code></pre><h3 id="测试redis"><a href="#测试redis" class="headerlink" title="测试redis"></a>测试redis</h3><ul>
+<li><p>redis中常见的五大数据类型</p>
+<ul>
+<li>String（字符串），List（列表），Set（集合），Hash（散列），ZSet   有序集合）</li>
+</ul>
+</li>
+<li><p>redis两个template</p>
+<ul>
+<li><p>StringRedisTemplate stringRedisTemplate;    //操作k-v都是字符串的</p>
+</li>
+<li><p>RedisTemplate redisTemplate;    //操作k-v都是对象的</p>
+</li>
+</ul>
+</li>
+<li><p>具体用法（redisTemplate是一样的）</p>
+<ul>
+<li>stringRedisTemplate.opsForValue()    [String（字符串）]</li>
+<li>stringRedisTemplate.opsForList()    [List（列表）]</li>
+<li>stringRedisTemplate.opsForSet()    [Set（集合）]</li>
+<li>stringRedisTemplate.opsForHash()    [Hash（散列）]</li>
+<li>stringRedisTemplate.opsForZSet()    [ZSet（有序集合）]</li>
+</ul>
+</li>
+</ul>
+<h4 id="test01"><a href="#test01" class="headerlink" title="test01"></a>test01</h4><pre><code>//测试给redis中保存数据，操作k-v都是字符串的
+
+@Autowired
+StringRedisTemplate stringRedisTemplate;    //操作k-v都是字符串的
+
+@Test
+public void test01(){
+
+
+
+    //stringRedisTemplate.opsForValue().append(&quot;msg&quot;,&quot;lihua&quot;);        //字符串
+    //String msg=stringRedisTemplate.opsForValue().get(&quot;msg&quot;);
+    //System.out.println(msg);
+
+    stringRedisTemplate.opsForList().leftPush(&quot;mylist&quot;,&quot;1&quot;);        //列表
+    stringRedisTemplate.opsForList().leftPush(&quot;mylist&quot;,&quot;2&quot;);
+
+}</code></pre><h4 id="test02"><a href="#test02" class="headerlink" title="test02"></a>test02</h4><pre><code>//测试保存对象
+
+@Autowired
+RedisTemplate redisTemplate;    //操作k-v都是对象的
+
+@Autowired
+EmployeeMapper employeeMapper;
+
+@Test
+public void test02(){
+    Employee EmpById=employeeMapper.getEmpById(1);
+    //默认如果保存对象，使用jdk序列化机制，序列化的数据保存到redis中
+    redisTemplate.opsForValue().set(&quot;emp-01&quot;,EmpById);
+    redisTemplate.opsForValue().set(&quot;dept-01&quot;,departmentMapper.getDepById(1));
+}</code></pre><h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><ul>
+<li><p>保存对象存进redis中的数据不是json数据，我们需要把它转换成json数据，这样我们就需要使用序列话机制，改变redisTemplate默认的序列化规则</p>
+</li>
+<li><p>默认保存对象，是使用jdk序列化规则，我们需要改成json序列化规则</p>
+</li>
+</ul>
+<p>Employee</p>
+<pre><code>//实现一个接口
+public class Employee implements Serializable{</code></pre><ul>
+<li>创建一个配置类</li>
+</ul>
+<p>config.MyRedisConfig</p>
+<pre><code>@Bean
+public RedisTemplate&lt;String, Object&gt; redisTemplate(RedisConnectionFactory factory) {
+
+    RedisTemplate&lt;String, Object&gt; template = new RedisTemplate&lt;&gt;();
+    // 配置连接工厂
+    template.setConnectionFactory(factory);
+
+    //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
+    Jackson2JsonRedisSerializer jacksonSeial = new Jackson2JsonRedisSerializer(Object.class);
+
+    ObjectMapper om = new ObjectMapper();
+    // 指定要序列化的域，field,get和set,以及修饰符范围，ANY是都有包括private和public
+    om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+    // 指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String,Integer等会跑出异常
+    om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+    jacksonSeial.setObjectMapper(om);
+
+    // 值采用json序列化
+    template.setValueSerializer(jacksonSeial);
+    //使用StringRedisSerializer来序列化和反序列化redis的key值
+    template.setKeySerializer(new StringRedisSerializer());
+
+    // 设置hash key 和value序列化模式
+    template.setHashKeySerializer(new StringRedisSerializer());
+    template.setHashValueSerializer(jacksonSeial);
+    template.afterPropertiesSet();
+
+    return template;
+}</code></pre><h3 id="自定义Cachemanager"><a href="#自定义Cachemanager" class="headerlink" title="自定义Cachemanager"></a>自定义Cachemanager</h3><ul>
+<li>缓存管理器,转换为json数据</li>
+<li>当我们运行存入缓存中的数据不是json数据，这时我们需要自定义CacheManager，把它转换为json数据</li>
+</ul>
+<p>config.MyRedisConfig</p>
+<pre><code>/**
+ * 缓存管理器,转换为json数据
+ */
+@Bean
+public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+    //初始化一个RedisCacheWriter
+    RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
+    //设置CacheManager的值序列化方式为json序列化
+    RedisSerializer&lt;Object&gt; jsonSerializer = new GenericJackson2JsonRedisSerializer();
+    RedisSerializationContext.SerializationPair&lt;Object&gt; pair = RedisSerializationContext.SerializationPair
+            .fromSerializer(jsonSerializer);
+    RedisCacheConfiguration defaultCacheConfig=RedisCacheConfiguration.defaultCacheConfig()
+            .serializeValuesWith(pair);
+    //设置默认超过期时间是30秒
+    defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+    //初始化RedisCacheManager
+    return new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
+}</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/31/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2019-12-31T00:53:42.133Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/31/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客文章</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/10/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98cache/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/31/hello-world/" class="archive-article-date">
-  	<time datetime="2019-12-31T00:43:04.842Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-31</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/13/springboot%E8%BF%9E%E6%8E%A5jdbc/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springboot连接jdbc</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/31/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -303,8 +642,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
