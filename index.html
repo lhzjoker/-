@@ -149,6 +149,170 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SprintBoot与消息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/11/SprintBoot%E4%B8%8E%E6%B6%88%E6%81%AF/">SprintBoot与消息</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/11/SprintBoot%E4%B8%8E%E6%B6%88%E6%81%AF/" class="archive-article-date">
+  	<time datetime="2020-02-11T05:59:11.277Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot与消息-JMS、AMQP、RabbitMQ"><a href="#SpringBoot与消息-JMS、AMQP、RabbitMQ" class="headerlink" title="SpringBoot与消息(JMS、AMQP、RabbitMQ)"></a>SpringBoot与消息(JMS、AMQP、RabbitMQ)</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#概述">概述</a></li>
+<li>2.<a href="#rabbitmq简介">rabbitmq简介</a></li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>1.大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力</li>
+</ul>
+<ul>
+<li><p>2.消息服务中两个重要概念：</p>
+<ul>
+<li>消息代理（message broker）和目的地（destination）<br>当消息发送者发送消息以后，将由消息代理接管，消息代理保证消息传递指定目的地。</li>
+</ul>
+</li>
+<li><p>3.消息队列主要有两种形式的目的地</p>
+<p>  1.队列（queue）：点对点消息通信（point-to-point）</p>
+<p>  2.主题（topic）：发布（publish）/订阅（subscribe）消息通信</p>
+</li>
+<li><p>4.点对点式：</p>
+<ul>
+<li><p>消息发送者发送消息，消息代理将其放入一个队列中，消息接收者从队列中获取消息内容，消息读取后被移出队列</p>
+</li>
+<li><p>消息只有唯一的发送者和接受者，但并不是说只能有一个接收者</p>
+</li>
+</ul>
+</li>
+<li><p>5.发布订阅式：</p>
+<ul>
+<li>发送者（发布者）发送消息到主题，多个接收者（订阅者）监听（订阅）这个主题，那么就会在消息到达时同时收到消息</li>
+</ul>
+</li>
+<li><p>6.JMS（Java Message Service）JAVA消息服务：</p>
+<ul>
+<li>基于JVM消息代理的规范。ActiveMQ、HornetMQ是JMS实现</li>
+</ul>
+</li>
+<li><p>7.AMQP（Advanced Message Queuing Protocol）</p>
+<ul>
+<li>高级消息队列协议，也是一个消息代理的规范，兼容JMS<br>RabbitMQ是AMQP的实现</li>
+</ul>
+</li>
+<li><p>8.Spring支持</p>
+<ul>
+<li>spring-jms提供了对JMS的支持</li>
+<li>spring-rabbit提供了对AMQP的支持</li>
+<li>需要ConnectionFactory的实现来连接消息代理</li>
+<li>提供JmsTemplate、RabbitTemplate来发送消息</li>
+<li>@JmsListener（JMS）、@RabbitListener（AMQP）注解在方法上监听消息代理发布的消息</li>
+<li>@EnableJms、@EnableRabbit开启支持</li>
+</ul>
+</li>
+<li><p>9.Spring Boot自动配置</p>
+<ul>
+<li>JmsAutoConfiguration</li>
+<li>RabbitAutoConfiguration</li>
+</ul>
+</li>
+</ul>
+<h2 id="rabbitmq简介"><a href="#rabbitmq简介" class="headerlink" title="rabbitmq简介"></a>rabbitmq简介</h2><ul>
+<li>RabbitMQ简介：</li>
+</ul>
+<p>RabbitMQ是一个由erlang开发的AMQP(Advanved Message Queue Protocol)的开源实现。</p>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul>
+<li>Message</li>
+</ul>
+<p>消息，消息是不具名的，它由消息头和消息体组成。消息体是不透明的，而息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、pririty（相对于其他消息的优先权）、delivery-mode（指出该消息可能需要持性存储）等。</p>
+<ul>
+<li>Publisher</li>
+</ul>
+<p>消息的生产者，也是一个向交换器发布消息的客户端应用程序。</p>
+<ul>
+<li>Exchange</li>
+</ul>
+<p>交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。<br>Exchange有4种类型：direct(默认)，fanout, topic, 和headers，不同类型的Exchange转发消息的策略有所区别</p>
+<ul>
+<li>Queue</li>
+</ul>
+<p>消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。</p>
+<ul>
+<li>Binding</li>
+</ul>
+<p>绑定，用于消息队列和交换器之间的关联。一个绑定就是基于路由键将交换器和消息队列连接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。<br>Exchange 和Queue的绑定可以是多对多的关系。</p>
+<ul>
+<li>Connection</li>
+</ul>
+<p>网络连接，比如一个TCP连接。</p>
+<ul>
+<li>Channel</li>
+</ul>
+<p>信道，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚拟连接，AMQP 命令都是通过信道发出去的，不管是发布消息、订阅队列还是接收消息，这些动作都是通过信道完成。因为对于操作系统来说建立和销毁 TCP 都是非常昂贵的开销，所以引入了信道的概念，以复用一条 TCP 连接。</p>
+<ul>
+<li>Consumer</li>
+</ul>
+<p>消息的消费者，表示一个从消息队列中取得消息的客户端应用程序。</p>
+<ul>
+<li>Virtual Host</li>
+</ul>
+<p>虚拟主机，表示一批交换器、消息队列和相关对象。虚拟主机是共享相同的身份认证和加密环境的独立服务器域。每个 vhost 本质上就是一个 mini 版的 RabbitMQ 服务器，拥有自己的队列、交换器、绑定和权限机制。vhost 是 AMQP 概念的基础，必须在连接时指定，RabbitMQ 默认的 vhost 是 / 。</p>
+<ul>
+<li>Broker</li>
+</ul>
+<p>表示消息队列服务器实体</p>
+<p><img src="/images/1.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/11/SprintBoot%E4%B8%8E%E6%B6%88%E6%81%AF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-springboot高级缓存cache" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
