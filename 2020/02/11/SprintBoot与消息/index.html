@@ -19,8 +19,14 @@
 <meta property="og:image" content="http://yoursite.com/images/3.png">
 <meta property="og:image" content="http://yoursite.com/images/4.png">
 <meta property="og:image" content="http://yoursite.com/images/5.png">
+<meta property="og:image" content="http://yoursite.com/images/6.jpg">
+<meta property="og:image" content="http://yoursite.com/images/8.jpg">
+<meta property="og:image" content="http://yoursite.com/images/7.jpg">
+<meta property="og:image" content="http://yoursite.com/images/9.jpg">
+<meta property="og:image" content="http://yoursite.com/images/10.jpg">
+<meta property="og:image" content="http://yoursite.com/images/11.jpg">
 <meta property="article:published_time" content="2020-02-11T05:59:11.277Z">
-<meta property="article:modified_time" content="2020-02-11T06:21:26.444Z">
+<meta property="article:modified_time" content="2020-02-12T07:49:18.258Z">
 <meta property="article:author" content="叫我阿华就好了">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/1.png">
@@ -179,7 +185,29 @@
 
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>1.<a href="#概述">概述</a></li>
-<li>2.<a href="#rabbitmq简介">rabbitmq简介</a></li>
+<li>2.<a href="#rabbitmq简介">rabbitmq简介</a><ul>
+<li>1.<a href="#核心概念">核心概念</a></li>
+</ul>
+</li>
+<li>3.<a href="#运行机制">运行机制</a><ul>
+<li>1.<a href="#exchange类型">exchange类型</a></li>
+</ul>
+</li>
+<li>4.<a href="#docker快速安装">docker快速安装</a></li>
+<li>5.<a href="#测试">测试</a></li>
+<li>6.<a href="#整合rabbitmq">整合rabbitmq</a><ul>
+<li>1.<a href="#导入依赖">导入依赖</a></li>
+<li>2.<a href="#配置信息">配置信息</a></li>
+<li>3.<a href="#测试rabbitmq">测试rabbitmq</a><ul>
+<li>1.<a href="#发布消息">发布消息</a></li>
+<li>2.<a href="#序列化">序列化</a></li>
+<li>3.<a href="#接收消息">接收消息</a></li>
+</ul>
+</li>
+<li>4.<a href="#监听机制">监听机制</a></li>
+<li>5.<a href="#amqpadmin">amqpadmin</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
 <li>1.大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力</li>
@@ -284,7 +312,7 @@
 </ul>
 <p>AMQP 中消息的路由过程和 Java 开发者熟悉的 JMS 存在一些差别，AMQP 中增加了 Exchange 和 Binding 的角色。生产者把消息发布到 Exchange 上，消息最终到达队列并被消费者接收，而 Binding 决定交换器的消息应该发送到那个队列。</p>
 <p><img src="/images/2.png" alt=""></p>
-<h3 id="Exchange类型"><a href="#Exchange类型" class="headerlink" title="Exchange类型"></a>Exchange类型</h3><ul>
+<h3 id="exchange类型"><a href="#exchange类型" class="headerlink" title="exchange类型"></a>exchange类型</h3><ul>
 <li>Exchange分发消息时根据类型的不同分发策略有区别，目前共四种类型：direct、fanout、topic、headers 。headers 匹配 AMQP 消息的 header 而不是路由键， headers 交换器和 direct 交换器完全一致，但性能差很多，目前几乎用不到了，所以直接看另外三种类型：</li>
 </ul>
 <ul>
@@ -302,7 +330,169 @@
 </ul>
 <p>topic 交换器通过模式匹配分配消息的路由键属性，将路由键和某个模式进行匹配，此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词，这些单词之间用点隔开。它同样也会识别两个通配符：符号“#”和符号“<em>”。#匹配0个或多个单词，</em>匹配一个单词。</p>
 <p><img src="/images/5.png" alt=""></p>
+<h2 id="docker快速安装"><a href="#docker快速安装" class="headerlink" title="docker快速安装"></a>docker快速安装</h2><ul>
+<li><p>1.拉取镜像</p>
+<ul>
+<li><p>指定版本，该版本包含了web控制页面</p>
+<p>docker pull rabbitmq:3.8.2-management</p>
+</li>
+</ul>
+</li>
+<li><p>2.运行镜像</p>
+<ul>
+<li><p>方式一：默认guest 用户，密码也是 guest</p>
+<p>docker run -d –hostname my-rabbit –name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.8.2-management</p>
+</li>
+<li><p>方式二：设置用户名和密码</p>
+<p>docker run -d –hostname my-rabbit –name rabbit -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password -p 15672:15672 -p 5672:5672 rabbitmq:3.8.2-management</p>
+</li>
+</ul>
+</li>
+<li><p>3.访问url页面</p>
+</li>
+</ul>
+<p><a href="http://localhost:15672/" target="_blank" rel="noopener">http://localhost:15672/</a></p>
+<p><img src="/images/6.jpg" alt=""></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>1.运行流程</li>
+</ul>
+<p><img src="/images/8.jpg" alt=""></p>
+<ul>
+<li>2.添加交换器</li>
+</ul>
+<p><img src="/images/7.jpg" alt=""></p>
+<ul>
+<li>3.添加绑定规则</li>
+</ul>
+<p><img src="/images/9.jpg" alt=""></p>
+<ul>
+<li>4.发布消息</li>
+</ul>
+<p><img src="/images/10.jpg" alt=""></p>
+<ul>
+<li>5.获取消息</li>
+</ul>
+<p><img src="/images/11.jpg" alt=""></p>
+<h2 id="整合rabbitmq"><a href="#整合rabbitmq" class="headerlink" title="整合rabbitmq"></a>整合rabbitmq</h2><h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>&lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
 
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                    &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.amqp&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-rabbit-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre><h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><p>application.properties</p>
+<pre><code>spring.rabbitmq.host=192.168.206.131    #linux主机地址
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+spring.rabbitmq.port=5672</code></pre><h3 id="测试rabbitmq"><a href="#测试rabbitmq" class="headerlink" title="测试rabbitmq"></a>测试rabbitmq</h3><ul>
+<li>RabbitTemplate：消息发送处理组件</li>
+</ul>
+<h4 id="发布消息"><a href="#发布消息" class="headerlink" title="发布消息"></a>发布消息</h4><pre><code>@Autowired
+RabbitTemplate rabbitTemplate;
+
+/**
+ * 1.单播（点对点）
+ */
+@Test
+void test01() {
+    //需要自己构造一个Message，定义消息体和消息头
+    //rabbitTemplate.send(exchange,routekey,message);
+
+    //object默认当成消息体，只需要传入要发送的对象，自动序列化发送给rabbitmq
+    //rabbitTemplate.convertAndSend(exchange,routekey,message);
+    Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+    map.put(&quot;msg&quot;,&quot;这是第一条消息&quot;);
+    map.put(&quot;data&quot;, Arrays.asList(&quot;helloworld&quot;,123,true));
+    //对象被默认序列化发送出去，是java的序列化规则，我们需要把它转换为json规则
+    //rabbitTemplate.convertAndSend(&quot;exchange.direct&quot;,&quot;atguigu.news&quot;,map);
+    rabbitTemplate.convertAndSend(&quot;exchange.direct&quot;,&quot;atguigu.news&quot;,map);
+}
+
+
+/**
+     * 广播（所有键全部发送）
+     */
+    @Test
+    public void test02(){
+        rabbitTemplate.convertAndSend(&quot;exchange.fanout&quot;,&quot;&quot;,new Book(&quot;上海堡垒&quot;,&quot;江南&quot;));
+    }</code></pre><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><ul>
+<li>对象被默认序列化发送出去，是java的序列化规则，我们需要把它转换为json规则</li>
+</ul>
+<p>MyAMQPConfig</p>
+<pre><code>//序列化配置
+@Configuration
+public class MyAMQPConfig {
+    @Bean
+    public MessageConverter messageConverter(){
+            return new Jackson2JsonMessageConverter();
+    }
+}</code></pre><h4 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h4><pre><code>//获取消息，获取完之后就从消息队列里删除
+    @Test
+    public void receive(){
+        Object o = rabbitTemplate.receiveAndConvert(&quot;atguigu.emps&quot;);
+        System.out.println(o.getClass());
+        System.out.println(o);
+    }</code></pre><h3 id="监听机制"><a href="#监听机制" class="headerlink" title="监听机制"></a>监听机制</h3><ul>
+<li><p>@RabbitListener + @EnableRabbit(放于主程序前)    </p>
+<p>  //开启基于注解的rabbitmq监听机制</p>
+</li>
+</ul>
+<pre><code>@Service
+public class BookService {
+    @RabbitListener(queues = &quot;atguigu.news&quot;)    //参数类型是数组，可以监听多个消息队列
+    //只要这个消息队列中有消息进来，这个方法就会进行
+    public void receive(Object o){
+        System.out.println(&quot;收到消息&quot;+o);
+    }
+}</code></pre><h3 id="amqpadmin"><a href="#amqpadmin" class="headerlink" title="amqpadmin"></a>amqpadmin</h3><ul>
+<li>AmqpAdmin</li>
+</ul>
+<p>rabbitmq系统管理功能组件</p>
+<ul>
+<li>功能</li>
+</ul>
+<p>创建和删除Queue，Exchange，Binding</p>
+<pre><code>@Autowired
+AmqpAdmin amqpAdmin;
+
+/**
+ * declare是创建，delete是删除
+ * destination：目的地（哪个消息队列）
+ * Binding.DestinationType.QUEUE  绑定的类型是queue
+ * durable:是否持久化
+ * routingkey：路由键
+ */
+
+
+@Test
+public void create(){
+    //创建exchange
+    amqpAdmin.declareExchange(new DirectExchange(&quot;amqpadmin.exchange&quot;));
+    System.out.println(&quot;创建exchange成功&quot;);
+    //创建queue
+    amqpAdmin.declareQueue(new Queue(&quot;amqpadmin.queue&quot;,true));    //durable:是否持久化
+    //创建Binding
+    amqpAdmin.declareBinding(new Binding(&quot;amqpadmin.queue&quot;,Binding.DestinationType.QUEUE,&quot;amqpadmin.exchange&quot;,&quot;amqpadmin.haha&quot;,null));
+}</code></pre>
       
 
       
