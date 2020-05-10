@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
+    <meta name="keywords" content="SpringBoot与安全, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
     <meta name="description" content="专注于Web,分享生活,分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 叫我阿华就好了</title>
+    <title>SpringBoot与安全 | 叫我阿华就好了</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">SpringBoot与安全</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-31
+                    2020-02-14
                 </div>
                 
 
@@ -459,15 +459,415 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="SpringBoot与安全（spring-security）"><a href="#SpringBoot与安全（spring-security）" class="headerlink" title="SpringBoot与安全（spring security）"></a>SpringBoot与安全（spring security）</h1><a id="more"></a>
+
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#安全">安全</a></li>
+<li>2.<a href="#web和安全">web和安全</a><ul>
+<li>1.<a href="#登陆注销">登陆注销</a></li>
+</ul>
+</li>
+<li>3.<a href="#环境搭建">环境搭建</a><ul>
+<li>1.<a href="#导入依赖">导入依赖</a></li>
+<li>2.<a href="#测试页面">测试页面</a></li>
+</ul>
+</li>
+<li>4.<a href="#测试">测试</a><ul>
+<li>1.<a href="#配置授权">配置授权</a></li>
+<li>2.<a href="#开启登陆功能">开启登陆功能</a></li>
+<li>3.<a href="#定义认证功能">定义认证功能</a></li>
+<li>4.<a href="#开启注销功能">开启注销功能</a></li>
+<li>5.<a href="#优化页面">优化页面</a></li>
+<li>6.<a href="#完善页面">完善页面</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>比较常见的安全框架有：Apache的shiro、Spring Security等等，相信用shiro的用户群体更多，而security功能更多一些。<br>Spring Security是针对Spring项目的安全框架，也是Spring Boot底层安全模块默认的技术选型。他可以实现强大的web安全控制。对于安全控制，我们仅需引入spring-boot-starter-security模块，进行少量的配置，即可实现强大的安全管理。几个类：</p>
+<ul>
+<li>WebSecurityConfigurerAdapter：自定义Security策略</li>
+<li>AuthenticationManagerBuilder：自定义认证策略</li>
+<li>@EnableWebSecurity：开启WebSecurity模式</li>
+</ul>
+<ul>
+<li>应用程序的两个主要区域是“认证”和“授权”（或者访问控制）。这两个主要区域是Spring Security 的两个目标。</li>
+</ul>
+<ul>
+<li>“认证”（Authentication），是建立一个他声明的主体的过程（一个“主体”一般是指用户，设备或一些可以在你的应用程序中执行动作的其他系统）。</li>
+</ul>
+<ul>
+<li><p>“授权”（Authorization）指确定一个主体是否允许在你的应用程序执行一个动作的过程。为了抵达需要授权的店，主体的身份已经有认证过程建立。</p>
+</li>
+<li><p>这个概念是通用的而不只在Spring Security中。</p>
+</li>
+</ul>
+<h2 id="Web和安全"><a href="#Web和安全" class="headerlink" title="Web和安全"></a>Web和安全</h2><h3 id="登陆注销"><a href="#登陆注销" class="headerlink" title="登陆注销"></a>登陆注销</h3><ul>
+<li>HttpSecurity配置登陆、注销功能</li>
+</ul>
+<ul>
+<li>Thymeleaf提供的SpringSecurity标签支持<ul>
+<li>需要引入thymeleaf-extras-springsecurity5</li>
+<li><html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurit></li>
+<li>sec:authentication=“name”获得当前用户的用户名</li>
+<li>sec:authorize=“hasRole(‘ADMIN’)”当前用户必须拥有ADMIN权限时才会显示标签内容</li>
+<li>sec:authentication=”principal.authorities” 获取当前用户的权限级别</li>
+<li>sec:authorize=”!isAuthenticated()” 用户没登陆才会显示的标签内容</li>
+<li>sec:authorize=”isAuthenticated()” 用户登陆才会显示的标签内容</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>remember me<ul>
+<li>表单添加remember-me的checkbox</li>
+<li>配置启用remember-me功能</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>CSRF（Cross-site request forgery）跨站请求伪造<ul>
+<li>HttpSecurity启用csrf功能，会为表单添加_csrf的值，提交携带来预防CSRF；</li>
+</ul>
+</li>
+</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+        &lt;thymeleaf.version&gt;3.0.11.RELEASE&lt;/thymeleaf.version&gt;
+        &lt;!--布局功能的支持程序  thymeleaf3的主程序  layout2版本以上--&gt;
+        &lt;thymeleaf-layout-dialect.version&gt;2.4.1&lt;/thymeleaf-layout-dialect.version&gt;
+        &lt;thymeleaf-extras-springsecurity.version&gt;3.0.4.RELEASE&lt;/thymeleaf-extras-springsecurity.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
+        &lt;artifactId&gt;thymeleaf-extras-springsecurity5&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;
+                &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;
+    &lt;/dependencies&gt;</code></pre><h3 id="测试页面"><a href="#测试页面" class="headerlink" title="测试页面"></a>测试页面</h3><ul>
+<li>welcome.html</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1 align=&quot;center&quot;&gt;欢迎光临武林秘籍管理系统&lt;/h1&gt;
+    &lt;h2 align=&quot;center&quot;&gt;游客您好，如果想查看武林秘籍 &lt;a th:href=&quot;@{/login}&quot;&gt;请登录&lt;/a&gt;&lt;/h2&gt;
+    &lt;hr&gt;
+
+    &lt;h3&gt;普通武功秘籍&lt;/h3&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level1/1}&quot;&gt;罗汉拳&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level1/2}&quot;&gt;武当长拳&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level1/3}&quot;&gt;全真剑法&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h3&gt;高级武功秘籍&lt;/h3&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level2/1}&quot;&gt;太极拳&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level2/2}&quot;&gt;七伤拳&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level2/3}&quot;&gt;梯云纵&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h3&gt;绝世武功秘籍&lt;/h3&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level3/1}&quot;&gt;葵花宝典&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level3/2}&quot;&gt;龟派气功&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a th:href=&quot;@{/level3/3}&quot;&gt;独孤九剑&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><ul>
+<li>login.html</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+    &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1 align=&quot;center&quot;&gt;欢迎登陆武林秘籍管理系统&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;div align=&quot;center&quot;&gt;
+    &lt;form action=&quot;&quot; method=&quot;post&quot;&gt;
+    用户名:&lt;input name=&quot;&quot;/&gt;&lt;br&gt;
+    密码:&lt;input name=&quot;&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;&gt;
+    &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><h4 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h4><ul>
+<li>1.html</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a th:href=&quot;@{/}&quot;&gt;返回&lt;/a&gt;
+        &lt;h1&gt;罗汉拳&lt;/h1&gt;
+        &lt;p&gt;罗汉拳站当央,打起来不要慌&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><ul>
+<li>2.html</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a th:href=&quot;@{/}&quot;&gt;返回&lt;/a&gt;
+        &lt;h1&gt;罗汉拳&lt;/h1&gt;
+        &lt;p&gt;罗汉拳站当央,打起来不要慌&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><ul>
+<li>3.html</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+    &lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;a th:href=&quot;@{/}&quot;&gt;返回&lt;/a&gt;
+        &lt;h1&gt;罗汉拳&lt;/h1&gt;
+        &lt;p&gt;罗汉拳站当央,打起来不要慌&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><ul>
+<li>level2/3和level1基本一致，页面架构如下</li>
+</ul>
+<p><img src="/images/18.png" alt=""></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>KungfuController.java</li>
+</ul>
+<pre><code>    package com.atguigu.security.controller;
+
+    import org.springframework.stereotype.Controller;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PathVariable;
+
+    @Controller
+    public class KungfuController {
+        private final String PREFIX = &quot;pages/&quot;;
+        /**
+        * 欢迎页
+        * @return
+        */
+        @GetMapping(&quot;/&quot;)
+        public String index() {
+            return &quot;welcome&quot;;
+        }
+
+        /**
+        * 登陆页
+        * @return
+        */
+        @GetMapping(&quot;/userlogin&quot;)
+        public String loginPage() {
+            return PREFIX+&quot;login&quot;;
+        }
+
+
+        /**
+        * level1页面映射
+        * @param path
+        * @return
+        */
+        @GetMapping(&quot;/level1/{path}&quot;)
+        public String level1(@PathVariable(&quot;path&quot;)String path) {
+            return PREFIX+&quot;level1/&quot;+path;
+        }
+
+        /**
+        * level2页面映射
+        * @param path
+        * @return
+        */
+        @GetMapping(&quot;/level2/{path}&quot;)
+        public String level2(@PathVariable(&quot;path&quot;)String path) {
+            return PREFIX+&quot;level2/&quot;+path;
+        }
+
+        /**
+        * level3页面映射
+        * @param path
+        * @return
+        */
+        @GetMapping(&quot;/level3/{path}&quot;)
+        public String level3(@PathVariable(&quot;path&quot;)String path) {
+            return PREFIX+&quot;level3/&quot;+path;
+        }
+    }</code></pre><ul>
+<li>访问:localhost:8080</li>
+</ul>
+<p><img src="/images/19.png" alt=""></p>
+<h3 id="配置授权"><a href="#配置授权" class="headerlink" title="配置授权"></a>配置授权</h3><ul>
+<li>pom文件引入security模块</li>
+</ul>
+<pre><code>    &lt;dependency&gt;
+    　　&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    　　&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre><ul>
+<li>现在所有人都能访问武功秘籍，这时我们要设置一下权限</li>
+</ul>
+<pre><code>    @EnableWebSecurity
+    public class MySercurityConfig extends WebSecurityConfigurerAdapter {
+
+        public void configure(HttpSecurity http) throws Exception {
+    //定制请求的授权规则
+    http.authorizeRequests().antMatchers(&quot;/&quot;).permitAll()
+            .antMatchers(&quot;/level1/**&quot;).hasRole(&quot;VIP1&quot;)
+            .antMatchers(&quot;/level2/**&quot;).hasRole(&quot;VIP2&quot;)
+            .antMatchers(&quot;/level3/**&quot;).hasRole(&quot;VIP3&quot;);
+    }</code></pre><p>我们现在访问罗汉拳，将会提示403，访问拒绝。</p>
+<p><img src="/images/21.png" alt=""></p>
+<h3 id="开启登陆功能"><a href="#开启登陆功能" class="headerlink" title="开启登陆功能"></a>开启登陆功能</h3><p>这是因为我们还没有登陆访问，加入如下的这段代码，让它为我们自动配置，只要不符合等级规则，就跳转到/login的登录页</p>
+<pre><code>    //开启自动配置的登陆功能，效果，如果没有登陆，没有权限将会来到登陆页面
+    http.formLogin();
+    //1./login来到登陆页
+    //2.重定向来到/login?error表示登陆失败
+    //3.更多的详细规定</code></pre><p><img src="/images/20.png" alt=""></p>
+<ul>
+<li>登陆成功，访问页面</li>
+</ul>
+<p><img src="/images/22.png" alt=""></p>
+<h3 id="定义认证功能"><a href="#定义认证功能" class="headerlink" title="定义认证功能"></a>定义认证功能</h3><ul>
+<li>讲我们拥有的用户信息对应匹配规则，然后使用这些账户登录试一下~（这里为了简单说明，我用的是内存保存，当然，可以使用“auth.jdbc…..”来进行数据库的链接使用）</li>
+</ul>
+<pre><code>    //定义认证功能
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //这里可以改进连数据库
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .withUser(&quot;zhangsan&quot;).password(passwordEncoder.encode(&quot;heihei&quot;)).roles(&quot;VIP1&quot;, &quot;VIP2&quot;)
+                .and()
+                .withUser(&quot;lisi&quot;).password(passwordEncoder.encode(&quot;123456&quot;)).roles(&quot;VIP2&quot;, &quot;VIP3&quot;)
+                .and()
+                .withUser(&quot;wangwu&quot;).password(passwordEncoder.encode(&quot;12456&quot;)).roles(&quot;VIP1&quot;, &quot;VIP3&quot;);</code></pre><h3 id="开启注销功能"><a href="#开启注销功能" class="headerlink" title="开启注销功能"></a>开启注销功能</h3><ul>
+<li>welcome.html</li>
+</ul>
+<pre><code>    &lt;!-- 把这段代码放到你想要的位置，比如登录后边边 --&gt;
+    &lt;form th:action=&quot;@{/logout}&quot; method=&quot;post&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;注销&quot;/&gt;
+    &lt;/form&gt;</code></pre><ul>
+<li>开启自动配置的注销功能</li>
+</ul>
+<pre><code>    http.logout().logoutSuccessUrl(&quot;/&quot;);    //注销成功后去初始页面
+    //1.访问/logout 表示用户注销，清空session
+    //2.退出成功将来到/login?logout页面</code></pre><h3 id="优化页面"><a href="#优化页面" class="headerlink" title="优化页面"></a>优化页面</h3><ul>
+<li>让不同用户看到首页展示不同，没有登录的呢，就看不到具体内容。</li>
+<li>pom文件引入springsecurity5；</li>
+</ul>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
+        &lt;artifactId&gt;thymeleaf-extras-springsecurity5&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre><ul>
+<li>在html中改造一下，引入springsecurity5（加两个div做判断是否授权-sec:authorize），如果没有认证（!isAuthenticated()）就展示游客请登录，如果认证了就展示角色信息；读取角色信息（sec:authentication）；</li>
+</ul>
+<pre><code>    &lt;!DOCTYPE html&gt;
+    &lt;html xmlns:th=&quot;http://www.thymeleaf.org&quot;
+          xmlns:sec=&quot;http://www.thymeleaf.org/thymeleaf-extras-springsecurity4&quot;&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1 align=&quot;center&quot;&gt;欢迎光临武林秘籍管理系统&lt;/h1&gt;
+    &lt;div sec:authorize=&quot;!isAuthenticated()&quot;&gt;
+        &lt;h2 align=&quot;center&quot;&gt;游客您好，如果想查看武林秘籍 &lt;a th:href=&quot;@{/login}&quot;&gt;请登录&lt;/a&gt;&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div sec:authorize=&quot;isAuthenticated()&quot;&gt;
+        &lt;h2&gt;&lt;span sec:authentication=&quot;name&quot;&gt;&lt;/span&gt;，您好，您的角色有:
+            &lt;span sec:authentication=&quot;principal.authorities&quot;&gt;&lt;/span&gt;&lt;/h2&gt;
+        &lt;form th:action=&quot;@{/logout}&quot; method=&quot;post&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;注销&quot;/&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;hr&gt;
+    &lt;div sec:authorize=&quot;hasRole(&#39;VIP1&#39;)&quot;&gt;
+        &lt;h3&gt;普通武功秘籍&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level1/1}&quot;&gt;罗汉拳&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level1/2}&quot;&gt;武当长拳&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level1/3}&quot;&gt;全真剑法&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div sec:authorize=&quot;hasRole(&#39;VIP2&#39;)&quot;&gt;
+        &lt;h3&gt;高级武功秘籍&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level2/1}&quot;&gt;太极拳&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level2/2}&quot;&gt;七伤拳&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level2/3}&quot;&gt;梯云纵&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div sec:authorize=&quot;hasRole(&#39;VIP3&#39;)&quot;&gt;
+        &lt;h3&gt;绝世武功秘籍&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level3/1}&quot;&gt;葵花宝典&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level3/2}&quot;&gt;龟派气功&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a th:href=&quot;@{/level3/3}&quot;&gt;独孤九剑&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre><p>再次启动就会发现差别</p>
+<ul>
+<li>没登陆状态，只会显示一个请登录页面</li>
+</ul>
+<p><img src="/images/24.png" alt=""></p>
+<ul>
+<li>登陆状态，成功会显示注销，用户名字，权限等信息</li>
+</ul>
+<p><img src="/images/23.png" alt=""></p>
+<h3 id="完善页面"><a href="#完善页面" class="headerlink" title="完善页面"></a>完善页面</h3><ul>
+<li>登陆的时候进入我们自己设计的页面，并用用户名和密码作关联<br>http.formLogin().usernameParameter(“user”).passwordParameter(“pwd”).loginPage(“/userlogin”);</li>
+</ul>
+<ul>
+<li><p>welcome.html优化，将登录请求变成userlogin请求；</p>
+</li>
+<li><p>login.html</p>
+</li>
+</ul>
+<pre><code>    &lt;div align=&quot;center&quot;&gt;
+        &lt;form th:action=&quot;@{/userlogin}&quot; method=&quot;post&quot;&gt;
+            用户名:&lt;input name=&quot;user&quot;/&gt;&lt;br&gt;
+            密码:&lt;input name=&quot;pwd&quot;&gt;&lt;br/&gt;
+            &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot;&gt;记住我&lt;br/&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;登陆&quot;&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;</code></pre><ul>
+<li>remeberme优化<br>http.rememberMe().rememberMeParameter(“remember”);</li>
+</ul>
 
             </div>
             <hr/>
@@ -493,7 +893,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/12/31/hello-world/">http://yoursite.com/2019/12/31/hello-world/</a>
+                    <a href="http://yoursite.com/2020/02/14/springboot-yu-an-quan/">http://yoursite.com/2020/02/14/springboot-yu-an-quan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -696,77 +1096,47 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/12/31/wo-de-di-yi-pian-bo-ke/">
+                <a href="/2020/02/14/springboot-yu-an-quan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="我的第一篇博客文章">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SpringBoot与安全">
                         
-                        <span class="card-title">我的第一篇博客文章</span>
+                        <span class="card-title">SpringBoot与安全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一章内容
+                            SpringBoot与安全（spring security）
 
-第二章内容
+目录
+1.安全
+2.web和安全
+1.登陆注销
 
-参考文献
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            叫我阿华就好了
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%8D%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">我的第一遍博客</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/12/31/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+
+3.环境搭建
+1.导入依赖
+2.测试页面
+
+
+4.测试
+1.配置授权
+2.开启登陆功能
+3.定义认证功能
+4.开启注销功能
+
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-14
                             </span>
                         <span class="publish-author">
                             
@@ -777,6 +1147,58 @@
                     </div>
                 </div>
 
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/02/11/sprintboot-yu-xiao-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="SprintBoot与消息">
+                        
+                        <span class="card-title">SprintBoot与消息</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            SpringBoot与消息(JMS、AMQP、RabbitMQ)
+
+目录
+1.概述
+2.rabbitmq简介
+1.核心概念
+
+
+3.运行机制
+1.exchange类型
+
+
+4.docker快速安装
+5.测试
+6.整合rabbitmq
+1.导
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            叫我阿华就好了
+                            
+                        </span>
+                    </div>
+                </div>
                 
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
+    <meta name="keywords" content="SprintBoot与消息, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
     <meta name="description" content="专注于Web,分享生活,分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 叫我阿华就好了</title>
+    <title>SprintBoot与消息 | 叫我阿华就好了</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">SprintBoot与消息</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-31
+                    2020-02-11
                 </div>
                 
 
@@ -459,16 +459,318 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="SpringBoot与消息-JMS、AMQP、RabbitMQ"><a href="#SpringBoot与消息-JMS、AMQP、RabbitMQ" class="headerlink" title="SpringBoot与消息(JMS、AMQP、RabbitMQ)"></a>SpringBoot与消息(JMS、AMQP、RabbitMQ)</h1><a id="more"></a>
 
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#概述">概述</a></li>
+<li>2.<a href="#rabbitmq简介">rabbitmq简介</a><ul>
+<li>1.<a href="#核心概念">核心概念</a></li>
+</ul>
+</li>
+<li>3.<a href="#运行机制">运行机制</a><ul>
+<li>1.<a href="#exchange类型">exchange类型</a></li>
+</ul>
+</li>
+<li>4.<a href="#docker快速安装">docker快速安装</a></li>
+<li>5.<a href="#测试">测试</a></li>
+<li>6.<a href="#整合rabbitmq">整合rabbitmq</a><ul>
+<li>1.<a href="#导入依赖">导入依赖</a></li>
+<li>2.<a href="#配置信息">配置信息</a></li>
+<li>3.<a href="#测试rabbitmq">测试rabbitmq</a><ul>
+<li>1.<a href="#发布消息">发布消息</a></li>
+<li>2.<a href="#序列化">序列化</a></li>
+<li>3.<a href="#接收消息">接收消息</a></li>
+</ul>
+</li>
+<li>4.<a href="#监听机制">监听机制</a></li>
+<li>5.<a href="#amqpadmin">amqpadmin</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>1.大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力</li>
+</ul>
+<ul>
+<li><p>2.消息服务中两个重要概念：</p>
+<ul>
+<li>消息代理（message broker）和目的地（destination）<br>当消息发送者发送消息以后，将由消息代理接管，消息代理保证消息传递指定目的地。</li>
+</ul>
+</li>
+<li><p>3.消息队列主要有两种形式的目的地</p>
+<p>  1.队列（queue）：点对点消息通信（point-to-point）</p>
+<p>  2.主题（topic）：发布（publish）/订阅（subscribe）消息通信</p>
+</li>
+<li><p>4.点对点式：</p>
+<ul>
+<li><p>消息发送者发送消息，消息代理将其放入一个队列中，消息接收者从队列中获取消息内容，消息读取后被移出队列</p>
+</li>
+<li><p>消息只有唯一的发送者和接受者，但并不是说只能有一个接收者</p>
+</li>
+</ul>
+</li>
+<li><p>5.发布订阅式：</p>
+<ul>
+<li>发送者（发布者）发送消息到主题，多个接收者（订阅者）监听（订阅）这个主题，那么就会在消息到达时同时收到消息</li>
+</ul>
+</li>
+<li><p>6.JMS（Java Message Service）JAVA消息服务：</p>
+<ul>
+<li>基于JVM消息代理的规范。ActiveMQ、HornetMQ是JMS实现</li>
+</ul>
+</li>
+<li><p>7.AMQP（Advanced Message Queuing Protocol）</p>
+<ul>
+<li>高级消息队列协议，也是一个消息代理的规范，兼容JMS<br>RabbitMQ是AMQP的实现</li>
+</ul>
+</li>
+<li><p>8.Spring支持</p>
+<ul>
+<li>spring-jms提供了对JMS的支持</li>
+<li>spring-rabbit提供了对AMQP的支持</li>
+<li>需要ConnectionFactory的实现来连接消息代理</li>
+<li>提供JmsTemplate、RabbitTemplate来发送消息</li>
+<li>@JmsListener（JMS）、@RabbitListener（AMQP）注解在方法上监听消息代理发布的消息</li>
+<li>@EnableJms、@EnableRabbit开启支持</li>
+</ul>
+</li>
+<li><p>9.Spring Boot自动配置</p>
+<ul>
+<li>JmsAutoConfiguration</li>
+<li>RabbitAutoConfiguration</li>
+</ul>
+</li>
+</ul>
+<h2 id="rabbitmq简介"><a href="#rabbitmq简介" class="headerlink" title="rabbitmq简介"></a>rabbitmq简介</h2><ul>
+<li>RabbitMQ简介：</li>
+</ul>
+<p>RabbitMQ是一个由erlang开发的AMQP(Advanved Message Queue Protocol)的开源实现。</p>
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul>
+<li>Message</li>
+</ul>
+<p>消息，消息是不具名的，它由消息头和消息体组成。消息体是不透明的，而息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、pririty（相对于其他消息的优先权）、delivery-mode（指出该消息可能需要持性存储）等。</p>
+<ul>
+<li>Publisher</li>
+</ul>
+<p>消息的生产者，也是一个向交换器发布消息的客户端应用程序。</p>
+<ul>
+<li>Exchange</li>
+</ul>
+<p>交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。<br>Exchange有4种类型：direct(默认)，fanout, topic, 和headers，不同类型的Exchange转发消息的策略有所区别</p>
+<ul>
+<li>Queue</li>
+</ul>
+<p>消息队列，用来保存消息直到发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将其取走。</p>
+<ul>
+<li>Binding</li>
+</ul>
+<p>绑定，用于消息队列和交换器之间的关联。一个绑定就是基于路由键将交换器和消息队列连接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。<br>Exchange 和Queue的绑定可以是多对多的关系。</p>
+<ul>
+<li>Connection</li>
+</ul>
+<p>网络连接，比如一个TCP连接。</p>
+<ul>
+<li>Channel</li>
+</ul>
+<p>信道，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚拟连接，AMQP 命令都是通过信道发出去的，不管是发布消息、订阅队列还是接收消息，这些动作都是通过信道完成。因为对于操作系统来说建立和销毁 TCP 都是非常昂贵的开销，所以引入了信道的概念，以复用一条 TCP 连接。</p>
+<ul>
+<li>Consumer</li>
+</ul>
+<p>消息的消费者，表示一个从消息队列中取得消息的客户端应用程序。</p>
+<ul>
+<li>Virtual Host</li>
+</ul>
+<p>虚拟主机，表示一批交换器、消息队列和相关对象。虚拟主机是共享相同的身份认证和加密环境的独立服务器域。每个 vhost 本质上就是一个 mini 版的 RabbitMQ 服务器，拥有自己的队列、交换器、绑定和权限机制。vhost 是 AMQP 概念的基础，必须在连接时指定，RabbitMQ 默认的 vhost 是 / 。</p>
+<ul>
+<li>Broker</li>
+</ul>
+<p>表示消息队列服务器实体</p>
+<p><img src="/images/1.png" alt=""></p>
+<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><ul>
+<li>AMQP 中的消息路由</li>
+</ul>
+<p>AMQP 中消息的路由过程和 Java 开发者熟悉的 JMS 存在一些差别，AMQP 中增加了 Exchange 和 Binding 的角色。生产者把消息发布到 Exchange 上，消息最终到达队列并被消费者接收，而 Binding 决定交换器的消息应该发送到那个队列。</p>
+<p><img src="/images/2.png" alt=""></p>
+<h3 id="exchange类型"><a href="#exchange类型" class="headerlink" title="exchange类型"></a>exchange类型</h3><ul>
+<li>Exchange分发消息时根据类型的不同分发策略有区别，目前共四种类型：direct、fanout、topic、headers 。headers 匹配 AMQP 消息的 header 而不是路由键， headers 交换器和 direct 交换器完全一致，但性能差很多，目前几乎用不到了，所以直接看另外三种类型：</li>
+</ul>
+<ul>
+<li>Direct Exchange</li>
+</ul>
+<p>消息中的路由键（routing key）如果和 Binding 中的 binding key 一致， 交换器就将消息发到对应的队列中。路由键与队列名完全匹配，如果一个队列绑定到交换机要求路由键为“dog”，则只转发 routing key 标记为“dog”的消息，不会转发“dog.puppy”，也不会转发“dog.guard”等等。它是完全匹配、单播的模式。</p>
+<p><img src="/images/3.png" alt=""></p>
+<ul>
+<li>Fanout Exchange</li>
+</ul>
+<p>每个发到 fanout 类型交换器的消息都会分到所有绑定的队列上去。fanout 交换器不处理路由键，只是简单的将队列绑定到交换器上，每个发送到交换器的消息都会被转发到与该交换器绑定的所有队列上。很像子网广播，每台子网内的主机都获得了一份复制的消息。fanout 类型转发消息是最快的。</p>
+<p><img src="/images/4.png" alt=""></p>
+<ul>
+<li>Topic Exchange</li>
+</ul>
+<p>topic 交换器通过模式匹配分配消息的路由键属性，将路由键和某个模式进行匹配，此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词，这些单词之间用点隔开。它同样也会识别两个通配符：符号“#”和符号“<em>”。#匹配0个或多个单词，</em>匹配一个单词。</p>
+<p><img src="/images/5.png" alt=""></p>
+<h2 id="docker快速安装"><a href="#docker快速安装" class="headerlink" title="docker快速安装"></a>docker快速安装</h2><ul>
+<li><p>1.拉取镜像</p>
+<ul>
+<li><p>指定版本，该版本包含了web控制页面</p>
+<p>docker pull rabbitmq:3.8.2-management</p>
+</li>
+</ul>
+</li>
+<li><p>2.运行镜像</p>
+<ul>
+<li><p>方式一：默认guest 用户，密码也是 guest</p>
+<p>docker run -d –hostname my-rabbit –name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3.8.2-management</p>
+</li>
+<li><p>方式二：设置用户名和密码</p>
+<p>docker run -d –hostname my-rabbit –name rabbit -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password -p 15672:15672 -p 5672:5672 rabbitmq:3.8.2-management</p>
+</li>
+</ul>
+</li>
+<li><p>3.访问url页面</p>
+</li>
+</ul>
+<p><a href="http://localhost:15672/" target="_blank" rel="noopener">http://localhost:15672/</a></p>
+<p><img src="/images/6.jpg" alt=""></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>1.运行流程</li>
+</ul>
+<p><img src="/images/8.jpg" alt=""></p>
+<ul>
+<li>2.添加交换器</li>
+</ul>
+<p><img src="/images/7.jpg" alt=""></p>
+<ul>
+<li>3.添加绑定规则</li>
+</ul>
+<p><img src="/images/9.jpg" alt=""></p>
+<ul>
+<li>4.发布消息</li>
+</ul>
+<p><img src="/images/10.jpg" alt=""></p>
+<ul>
+<li>5.获取消息</li>
+</ul>
+<p><img src="/images/11.jpg" alt=""></p>
+<h2 id="整合rabbitmq"><a href="#整合rabbitmq" class="headerlink" title="整合rabbitmq"></a>整合rabbitmq</h2><h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>    &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+            &lt;/dependency&gt;
+
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+                &lt;scope&gt;test&lt;/scope&gt;
+                &lt;exclusions&gt;
+                    &lt;exclusion&gt;
+                        &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;
+                        &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;
+                    &lt;/exclusion&gt;
+                &lt;/exclusions&gt;
+            &lt;/dependency&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.amqp&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-rabbit-test&lt;/artifactId&gt;
+                &lt;scope&gt;test&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;</code></pre><h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><p>application.properties</p>
+<pre><code>    spring.rabbitmq.host=192.168.206.131    #linux主机地址
+    spring.rabbitmq.username=guest
+    spring.rabbitmq.password=guest
+    spring.rabbitmq.port=5672</code></pre><h3 id="测试rabbitmq"><a href="#测试rabbitmq" class="headerlink" title="测试rabbitmq"></a>测试rabbitmq</h3><ul>
+<li>RabbitTemplate：消息发送处理组件</li>
+</ul>
+<h4 id="发布消息"><a href="#发布消息" class="headerlink" title="发布消息"></a>发布消息</h4><pre><code>    @Autowired
+    RabbitTemplate rabbitTemplate;
+
+    /**
+     * 1.单播（点对点）
+     */
+    @Test
+    void test01() {
+        //需要自己构造一个Message，定义消息体和消息头
+        //rabbitTemplate.send(exchange,routekey,message);
+
+        //object默认当成消息体，只需要传入要发送的对象，自动序列化发送给rabbitmq
+        //rabbitTemplate.convertAndSend(exchange,routekey,message);
+        Map&lt;String,Object&gt; map=new HashMap&lt;&gt;();
+        map.put(&quot;msg&quot;,&quot;这是第一条消息&quot;);
+        map.put(&quot;data&quot;, Arrays.asList(&quot;helloworld&quot;,123,true));
+        //对象被默认序列化发送出去，是java的序列化规则，我们需要把它转换为json规则
+        //rabbitTemplate.convertAndSend(&quot;exchange.direct&quot;,&quot;atguigu.news&quot;,map);
+        rabbitTemplate.convertAndSend(&quot;exchange.direct&quot;,&quot;atguigu.news&quot;,map);
+    }
+
+
+    /**
+         * 广播（所有键全部发送）
+         */
+        @Test
+        public void test02(){
+            rabbitTemplate.convertAndSend(&quot;exchange.fanout&quot;,&quot;&quot;,new Book(&quot;上海堡垒&quot;,&quot;江南&quot;));
+        }</code></pre><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><ul>
+<li>对象被默认序列化发送出去，是java的序列化规则，我们需要把它转换为json规则</li>
+</ul>
+<p>MyAMQPConfig</p>
+<pre><code>    //序列化配置
+    @Configuration
+    public class MyAMQPConfig {
+        @Bean
+        public MessageConverter messageConverter(){
+                return new Jackson2JsonMessageConverter();
+        }
+    }</code></pre><h4 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h4><pre><code>    //获取消息，获取完之后就从消息队列里删除
+        @Test
+        public void receive(){
+            Object o = rabbitTemplate.receiveAndConvert(&quot;atguigu.emps&quot;);
+            System.out.println(o.getClass());
+            System.out.println(o);
+        }</code></pre><h3 id="监听机制"><a href="#监听机制" class="headerlink" title="监听机制"></a>监听机制</h3><ul>
+<li><p>@RabbitListener + @EnableRabbit(放于主程序前)    </p>
+<p>  //开启基于注解的rabbitmq监听机制</p>
+</li>
+</ul>
+<pre><code>    @Service
+    public class BookService {
+        @RabbitListener(queues = &quot;atguigu.news&quot;)    //参数类型是数组，可以监听多个消息队列
+        //只要这个消息队列中有消息进来，这个方法就会进行
+        public void receive(Object o){
+            System.out.println(&quot;收到消息&quot;+o);
+        }
+    }</code></pre><h3 id="amqpadmin"><a href="#amqpadmin" class="headerlink" title="amqpadmin"></a>amqpadmin</h3><ul>
+<li>AmqpAdmin</li>
+</ul>
+<p>rabbitmq系统管理功能组件</p>
+<ul>
+<li>功能</li>
+</ul>
+<p>创建和删除Queue，Exchange，Binding</p>
+<pre><code>    @Autowired
+    AmqpAdmin amqpAdmin;
+
+    /**
+     * declare是创建，delete是删除
+     * destination：目的地（哪个消息队列）
+     * Binding.DestinationType.QUEUE  绑定的类型是queue
+     * durable:是否持久化
+     * routingkey：路由键
+     */
+
+
+    @Test
+    public void create(){
+        //创建exchange
+        amqpAdmin.declareExchange(new DirectExchange(&quot;amqpadmin.exchange&quot;));
+        System.out.println(&quot;创建exchange成功&quot;);
+        //创建queue
+        amqpAdmin.declareQueue(new Queue(&quot;amqpadmin.queue&quot;,true));    //durable:是否持久化
+        //创建Binding
+        amqpAdmin.declareBinding(new Binding(&quot;amqpadmin.queue&quot;,Binding.DestinationType.QUEUE,&quot;amqpadmin.exchange&quot;,&quot;amqpadmin.haha&quot;,null));
+    }</code></pre>
             </div>
             <hr/>
 
@@ -493,7 +795,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/12/31/hello-world/">http://yoursite.com/2019/12/31/hello-world/</a>
+                    <a href="http://yoursite.com/2020/02/11/sprintboot-yu-xiao-xi/">http://yoursite.com/2020/02/11/sprintboot-yu-xiao-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -700,28 +1002,42 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/12/31/wo-de-di-yi-pian-bo-ke/">
+                <a href="/2020/02/14/springboot-yu-an-quan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="我的第一篇博客文章">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SpringBoot与安全">
                         
-                        <span class="card-title">我的第一篇博客文章</span>
+                        <span class="card-title">SpringBoot与安全</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一章内容
+                            SpringBoot与安全（spring security）
 
-第二章内容
+目录
+1.安全
+2.web和安全
+1.登陆注销
 
-参考文献
+
+3.环境搭建
+1.导入依赖
+2.测试页面
+
+
+4.测试
+1.配置授权
+2.开启登陆功能
+3.定义认证功能
+4.开启注销功能
+
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-14
                         </span>
                         <span class="publish-author">
                             
@@ -730,14 +1046,6 @@
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%8D%E5%8D%9A%E5%AE%A2/">
-                        <span class="chip bg-color">我的第一遍博客</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -746,37 +1054,58 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/12/31/hello-world/">
+                <a href="/2020/02/10/springboot-gao-ji-huan-cun-cache/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="springboot高级缓存">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">springboot高级缓存</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            springboot高级,缓存cache并且整合redis
+
+目录
+1.springboot缓存
+1.jsr107缓存规范
+2.spring的缓存抽象
+3.整合项目
+1.导入相关配置
+2.配置文件
+3.创建bean实例
+4.创建mapper
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-10
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            叫我阿华就好了
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/springboot/" class="post-category">
+                                    springboot
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">springboot高级缓存</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

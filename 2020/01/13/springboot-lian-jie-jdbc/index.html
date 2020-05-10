@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
+    <meta name="keywords" content="springboot连接jdbc, HTML,CSS,JavaScript,JQuery,React,Vue.js等">
     <meta name="description" content="专注于Web,分享生活,分享知识">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 叫我阿华就好了</title>
+    <title>springboot连接jdbc | 叫我阿华就好了</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">springboot连接jdbc</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-12-31
+                    2020-01-13
                 </div>
                 
 
@@ -459,15 +459,345 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="springboot连接jdbc数据库并且整合Druid数据源"><a href="#springboot连接jdbc数据库并且整合Druid数据源" class="headerlink" title="springboot连接jdbc数据库并且整合Druid数据源"></a>springboot连接jdbc数据库并且整合Druid数据源</h1><a id="more"></a>
+
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#连接jdbc数据库">连接jdbc数据库</a><ul>
+<li>1.<a href="#导入相关依赖">导入相关依赖</a></li>
+<li>2.<a href="#配置数据库连接信息">配置数据库连接信息</a></li>
+<li>3.<a href="#测试连接">测试连接</a></li>
+<li>4.<a href="#数据库查询数据返回网页">数据库查询数据返回网页</a></li>
+</ul>
+</li>
+<li>1.<a href="#整合Druid数据源">整合Druid数据源</a><ul>
+<li>1.<a href="#导入依赖">导入依赖</a></li>
+<li>2.<a href="#配置信息">配置信息</a></li>
+<li>3.<a href="#测试类查看使用的数据源">测试类查看使用的数据源</a></li>
+<li>4.<a href="#编写一个Druid配置类">编写一个Druid配置类</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="连接jdbc数据库"><a href="#连接jdbc数据库" class="headerlink" title="连接jdbc数据库"></a>连接jdbc数据库</h1><h2 id="导入相关依赖"><a href="#导入相关依赖" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h2><pre><code>&lt;!--导入jdbc相关依赖--&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+      &lt;version&gt;2.1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;</code></pre><h2 id="配置数据库连接信息"><a href="#配置数据库连接信息" class="headerlink" title="配置数据库连接信息"></a>配置数据库连接信息</h2><ul>
+<li>application.yml</li>
+</ul>
+<pre><code>    spring:
+      datasource:
+        username: root
+        password: 数据库密码
+        url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC
+        driver-class-name: com.mysql.cj.jdbc.Driver</code></pre><h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><ul>
+<li>在测试类中测试</li>
+</ul>
+<pre><code>    @SpringBootTest
+    class SpringBootData06JdbcApplicationTests {
+
+      @Autowired
+      DataSource dataSource;
+
+      //测试连接数据库
+      @Test
+      void contextLoads() throws SQLException {
+        System.out.println(dataSource.getClass());
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+      }
+    }</code></pre><ul>
+<li>springboot默认是使用com.zaxxer.hikari.HikariDataSource作为数据源，</li>
+</ul>
+<p>2.0以下是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；</p>
+<pre><code>    如果出现com.zaxxer.hikari.HikariDataSource则表示连接成功</code></pre><h2 id="数据库查询数据返回网页"><a href="#数据库查询数据返回网页" class="headerlink" title="数据库查询数据返回网页"></a>数据库查询数据返回网页</h2><pre><code>    @RestController
+    public class JdbcController {
+
+        //查询数据库的数据返回网页
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+        @GetMapping(&quot;/query&quot;)
+        public Map&lt;String,Object&gt; map(){
+            List&lt;Map&lt;String, Object&gt;&gt; list = jdbcTemplate.queryForList(&quot;SELECT * from department&quot;);
+            return list.get(0);
+        }
+    }</code></pre><p><a href="http://localhost:8080/query" target="_blank" rel="noopener">查询</a>  </p>
+<h1 id="整合Druid数据源"><a href="#整合Druid数据源" class="headerlink" title="整合Druid数据源"></a>整合Druid数据源</h1><h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><ul>
+<li>在springboot项目中导入druid数据源依赖<a href="https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter" target="_blank" rel="noopener">点击查询最新依赖</a></li>
+</ul>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+        &lt;version&gt;1.1.20&lt;/version&gt;
+    &lt;/dependency&gt;</code></pre><h2 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h2><ul>
+<li>application.yml</li>
+</ul>
+<pre><code>    #jdbc的配置
+    spring:
+      datasource:
+        password: 980508
+        username: root
+        url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        initialization-mode: always
+        #整合Druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        druid:
+          # 连接池配置
+          # 配置初始化大小、最小、最大
+          initial-size: 1
+          min-idle: 1
+          max-active: 20
+          # 配置获取连接等待超时的时间
+          max-wait: 3000
+          validation-query: SELECT 1 FROM DUAL
+          test-on-borrow: false
+          test-on-return: false
+          test-while-idle: true
+          pool-prepared-statements: true
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 300000
+          filters: stat,wall,slf4j
+          # 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配
+          web-stat-filter:
+            enabled: true
+            url-pattern: /*
+            exclusions: &quot;*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*&quot;
+          stat-view-servlet:
+            enabled: true
+            url-pattern: /druid/*
+            login-username: lihuazhou
+            login-password: 980508
+            allow: 192.168.182.1</code></pre><h2 id="测试类查看使用的数据源"><a href="#测试类查看使用的数据源" class="headerlink" title="测试类查看使用的数据源"></a>测试类查看使用的数据源</h2><pre><code>    @SpringBootTest
+    class SpringbootJdbcApplicationTests {
+        @Autowired
+        private DataSource dataSource;
+        @Test
+        void contextLoads() throws SQLException {
+            System.out.println(dataSource.getClass());
+            System.out.println(dataSource.getConnection());
+        }
+    }</code></pre><h2 id="编写一个Druid配置类"><a href="#编写一个Druid配置类" class="headerlink" title="编写一个Druid配置类"></a>编写一个Druid配置类</h2><ul>
+<li><p>DruidConfig</p>
+</li>
+<li><p>需要把配置信息从application.yml中加入到容器中</p>
+</li>
+</ul>
+<pre><code>    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+            @Bean
+            public DataSource druid(){
+                return  new DruidDataSource();
+            }</code></pre><ul>
+<li>配置一个Servelet容器来管理后台（Druid的监控）</li>
+</ul>
+<pre><code>    @Bean
+    public ServletRegistrationBean statViewServlet(){
+        ServletRegistrationBean bean=new ServletRegistrationBean(new StatViewServlet(),&quot;/druid/*&quot;); //druid后台的路径
+        Map&lt;String,String&gt; initParams =new HashMap&lt;&gt;();
+
+        initParams.put(&quot;loginUsername&quot;,&quot;lihuazhou&quot;);
+        initParams.put(&quot;loginPassword&quot;,&quot;980508&quot;);
+        initParams.put(&quot;allow&quot;,&quot;&quot;);//可以设置为localhost下才能访问，默认是所有都可以访问
+        initParams.put(&quot;deny&quot;,&quot;&quot;);//默认是不禁用路径
+        bean.setInitParameters(initParams);
+        return bean;
+    }</code></pre><ul>
+<li>配置一个web监控的Filter（拦截一些操作，有点类似拦截器）</li>
+</ul>
+<pre><code>    @Bean
+    public FilterRegistrationBean webStatFilter(){
+        FilterRegistrationBean bean = new FilterRegistrationBean();
+        bean.setFilter(new WebStatFilter());
+        Map&lt;String,String&gt; initParams = new HashMap&lt;&gt;();
+        initParams.put(&quot;exclusions&quot;,&quot;*.js,*.css,/druid/*&quot;);     //除了这些操作的数据，其他都会被拦截
+        bean.setInitParameters(initParams);
+        bean.setUrlPatterns(Arrays.asList(&quot;/*&quot;));
+      return  bean;
+      }</code></pre><ul>
+<li>Druid页面<h1 id="springboot连接jdbc数据库并且整合Druid数据源-1"><a href="#springboot连接jdbc数据库并且整合Druid数据源-1" class="headerlink" title="springboot连接jdbc数据库并且整合Druid数据源"></a>springboot连接jdbc数据库并且整合Druid数据源</h1></li>
+</ul>
+<h2 id="目录-1"><a href="#目录-1" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>1.<a href="#连接jdbc数据库">连接jdbc数据库</a><ul>
+<li>1.<a href="#导入相关依赖">导入相关依赖</a></li>
+<li>2.<a href="#配置数据库连接信息">配置数据库连接信息</a></li>
+<li>3.<a href="#测试连接">测试连接</a></li>
+<li>4.<a href="#数据库查询数据返回网页">数据库查询数据返回网页</a></li>
+</ul>
+</li>
+<li>1.<a href="#整合Druid数据源">整合Druid数据源</a><ul>
+<li>1.<a href="#导入依赖">导入依赖</a></li>
+<li>2.<a href="#配置信息">配置信息</a></li>
+<li>3.<a href="#测试类查看使用的数据源">测试类查看使用的数据源</a></li>
+<li>4.<a href="#编写一个Druid配置类">编写一个Druid配置类</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="连接jdbc数据库-1"><a href="#连接jdbc数据库-1" class="headerlink" title="连接jdbc数据库"></a>连接jdbc数据库</h1><h2 id="导入相关依赖-1"><a href="#导入相关依赖-1" class="headerlink" title="导入相关依赖"></a>导入相关依赖</h2><pre><code>&lt;!--导入jdbc相关依赖--&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+      &lt;version&gt;2.1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;</code></pre><h2 id="配置数据库连接信息-1"><a href="#配置数据库连接信息-1" class="headerlink" title="配置数据库连接信息"></a>配置数据库连接信息</h2><ul>
+<li>application.yml</li>
+</ul>
+<pre><code>    spring:
+      datasource:
+        username: root
+        password: 数据库密码
+        url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC
+        driver-class-name: com.mysql.cj.jdbc.Driver</code></pre><h2 id="测试连接-1"><a href="#测试连接-1" class="headerlink" title="测试连接"></a>测试连接</h2><ul>
+<li>在测试类中测试</li>
+</ul>
+<pre><code>    @SpringBootTest
+    class SpringBootData06JdbcApplicationTests {
+
+      @Autowired
+      DataSource dataSource;
+
+      //测试连接数据库
+      @Test
+      void contextLoads() throws SQLException {
+        System.out.println(dataSource.getClass());
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+      }
+    }</code></pre><ul>
+<li>springboot默认是使用com.zaxxer.hikari.HikariDataSource作为数据源，</li>
+</ul>
+<p>2.0以下是用org.apache.tomcat.jdbc.pool.DataSource作为数据源；</p>
+<pre><code>    如果出现com.zaxxer.hikari.HikariDataSource则表示连接成功</code></pre><h2 id="数据库查询数据返回网页-1"><a href="#数据库查询数据返回网页-1" class="headerlink" title="数据库查询数据返回网页"></a>数据库查询数据返回网页</h2><pre><code>    @RestController
+    public class JdbcController {
+
+        //查询数据库的数据返回网页
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+        @GetMapping(&quot;/query&quot;)
+        public Map&lt;String,Object&gt; map(){
+            List&lt;Map&lt;String, Object&gt;&gt; list = jdbcTemplate.queryForList(&quot;SELECT * from department&quot;);
+            return list.get(0);
+        }
+    }</code></pre><p><a href="http://localhost:8080/query" target="_blank" rel="noopener">查询</a>  </p>
+<h1 id="整合Druid数据源-1"><a href="#整合Druid数据源-1" class="headerlink" title="整合Druid数据源"></a>整合Druid数据源</h1><h2 id="导入依赖-1"><a href="#导入依赖-1" class="headerlink" title="导入依赖"></a>导入依赖</h2><ul>
+<li>在springboot项目中导入druid数据源依赖<a href="https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter" target="_blank" rel="noopener">点击查询最新依赖</a></li>
+</ul>
+<pre><code>    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;
+        &lt;version&gt;1.1.20&lt;/version&gt;
+    &lt;/dependency&gt;</code></pre><h2 id="配置信息-1"><a href="#配置信息-1" class="headerlink" title="配置信息"></a>配置信息</h2><ul>
+<li>application.yml</li>
+</ul>
+<pre><code>    #jdbc的配置
+    spring:
+      datasource:
+        password: 980508
+        username: root
+        url: jdbc:mysql://localhost:3306/springboot?serverTimezone=UTC&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        initialization-mode: always
+        #整合Druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        druid:
+          # 连接池配置
+          # 配置初始化大小、最小、最大
+          initial-size: 1
+          min-idle: 1
+          max-active: 20
+          # 配置获取连接等待超时的时间
+          max-wait: 3000
+          validation-query: SELECT 1 FROM DUAL
+          test-on-borrow: false
+          test-on-return: false
+          test-while-idle: true
+          pool-prepared-statements: true
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 300000
+          filters: stat,wall,slf4j
+          # 配置web监控,默认配置也和下面相同(除用户名密码，enabled默认false外)，其他可以不配
+          web-stat-filter:
+            enabled: true
+            url-pattern: /*
+            exclusions: &quot;*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*&quot;
+          stat-view-servlet:
+            enabled: true
+            url-pattern: /druid/*
+            login-username: lihuazhou
+            login-password: 980508
+            allow: 192.168.182.1</code></pre><h2 id="测试类查看使用的数据源-1"><a href="#测试类查看使用的数据源-1" class="headerlink" title="测试类查看使用的数据源"></a>测试类查看使用的数据源</h2><pre><code>    @SpringBootTest
+    class SpringbootJdbcApplicationTests {
+        @Autowired
+        private DataSource dataSource;
+        @Test
+        void contextLoads() throws SQLException {
+            System.out.println(dataSource.getClass());
+            System.out.println(dataSource.getConnection());
+        }
+    }</code></pre><h2 id="编写一个Druid配置类-1"><a href="#编写一个Druid配置类-1" class="headerlink" title="编写一个Druid配置类"></a>编写一个Druid配置类</h2><ul>
+<li><p>DruidConfig</p>
+</li>
+<li><p>需要把配置信息从application.yml中加入到容器中</p>
+</li>
+</ul>
+<pre><code>    @ConfigurationProperties(prefix = &quot;spring.datasource&quot;)
+            @Bean
+            public DataSource druid(){
+                return  new DruidDataSource();
+            }</code></pre><ul>
+<li>配置一个Servelet容器来管理后台（Druid的监控）</li>
+</ul>
+<pre><code>    @Bean
+    public ServletRegistrationBean statViewServlet(){
+        ServletRegistrationBean bean=new ServletRegistrationBean(new StatViewServlet(),&quot;/druid/*&quot;); //druid后台的路径
+        Map&lt;String,String&gt; initParams =new HashMap&lt;&gt;();
+
+        initParams.put(&quot;loginUsername&quot;,&quot;lihuazhou&quot;);
+        initParams.put(&quot;loginPassword&quot;,&quot;980508&quot;);
+        initParams.put(&quot;allow&quot;,&quot;&quot;);//可以设置为localhost下才能访问，默认是所有都可以访问
+        initParams.put(&quot;deny&quot;,&quot;&quot;);//默认是不禁用路径
+        bean.setInitParameters(initParams);
+        return bean;
+    }</code></pre><ul>
+<li>配置一个web监控的Filter（拦截一些操作，有点类似拦截器）</li>
+</ul>
+<pre><code>    @Bean
+    public FilterRegistrationBean webStatFilter(){
+        FilterRegistrationBean bean = new FilterRegistrationBean();
+        bean.setFilter(new WebStatFilter());
+        Map&lt;String,String&gt; initParams = new HashMap&lt;&gt;();
+        initParams.put(&quot;exclusions&quot;,&quot;*.js,*.css,/druid/*&quot;);     //除了这些操作的数据，其他都会被拦截
+        bean.setInitParameters(initParams);
+        bean.setUrlPatterns(Arrays.asList(&quot;/*&quot;));
+      return  bean;
+      }</code></pre><ul>
+<li>Druid页面</li>
+</ul>
+<p><img src="/images/25.png" alt=""></p>
 
             </div>
             <hr/>
@@ -493,7 +823,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yoursite.com/2019/12/31/hello-world/">http://yoursite.com/2019/12/31/hello-world/</a>
+                    <a href="http://yoursite.com/2020/01/13/springboot-lian-jie-jdbc/">http://yoursite.com/2020/01/13/springboot-lian-jie-jdbc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -700,6 +1030,65 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2020/02/10/springboot-gao-ji-huan-cun-cache/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="springboot高级缓存">
+                        
+                        <span class="card-title">springboot高级缓存</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            springboot高级,缓存cache并且整合redis
+
+目录
+1.springboot缓存
+1.jsr107缓存规范
+2.spring的缓存抽象
+3.整合项目
+1.导入相关配置
+2.配置文件
+3.创建bean实例
+4.创建mapper
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-10
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/springboot/" class="post-category">
+                                    springboot
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98/">
+                        <span class="chip bg-color">springboot高级缓存</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2019/12/31/wo-de-di-yi-pian-bo-ke/">
                     <div class="card-image">
                         
@@ -720,9 +1109,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -739,44 +1128,6 @@
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/12/31/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-31
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            叫我阿华就好了
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
