@@ -1,6 +1,6 @@
 
 # 阿华的个人博客
 
-* https://lhzjoker.github.io/
+* http://lhz520.top/
 
 * [springboot笔记](https://github.com/lhzjoker/SpringBoot)
