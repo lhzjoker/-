@@ -14,69 +14,62 @@
             })
             .catch(() =&gt; {
               this.loading = false;
-            });</code></pre><h3 id="Pagination组件"><a href="#Pagination组件" class="headerlink" title="Pagination组件"></a>Pagination组件</h3><ul><li>做一个应用不可能一个页面都能把所有数据加载完，所以我们要实现分页效果，一页只实现少量的数据，可以分很多页</li></ul><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul><li>注意，这是一个组件，要在components中引入，这里的语法可能不太好理解，Pagination.name就相当于<el-pagination></el-pagination>，这个是在html中引入的组件</li></ul><pre><code>    import { Pagination } from &quot;element-ui&quot;;
+            });</code></pre><h3 id="Pagination组件"><a href="#Pagination组件" class="headerlink" title="Pagination组件"></a>Pagination组件</h3><ul><li>做一个应用不可能一个页面都能把所有数据加载完，所以我们要实现分页效果，一页只实现少量的数据，可以分很多页</li></ul><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><ul><li><p>注意，这是一个组件，要在components中引入，这里的语法可能不太好理解，Pagination.name就相当于<el-pagination></el-pagination>，这个是在html中引入的组件</p><pre><code>  import { Pagination } from &quot;element-ui&quot;;
 
-    components: {
-        [Pagination.name]: Pagination
-      }
+  components: {
+      [Pagination.name]: Pagination
+    }</code></pre></li></ul><pre><code>     &lt;el-pagination class=&quot;pagination&quot; :pageSize=&quot;pageSize&quot; background layout=&quot;prev, pager, next&quot; :total=&quot;total&quot; @current-change=&quot;handelchange&quot;&gt;&lt;/el-pagination&gt;</code></pre><ul><li><p>这里面的组件包含很多属性，pageSize就是页面的大小可以包含几条数据，total表示总数据，注意属性的调用可能有驼峰命名法，比如文档中调用属性page-size会出错，你要改成pageSize</p></li><li><p>current-change是事件名称，page页改变的时候会触发，回调参数是当前页数</p><pre><code>   //点击触发事件，会有一个回调参数，这个回调参数就是当前的页数
+      handelchange(pageNum){
+        this.pageNum = pageNum
+        this.getOrderList()
+      }</code></pre></li></ul><h2 id="加载更多"><a href="#加载更多" class="headerlink" title="加载更多"></a>加载更多</h2><h3 id="Button组件"><a href="#Button组件" class="headerlink" title="Button组件"></a>Button组件</h3><ul><li>点击Button组件会加载更多数据</li></ul><h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><ul><li><p>组件的loading属性是显示加载loading的，需要动态绑定，在加载时显示，加载完成后关闭，绑定到getOrderList</p><pre><code>  import { Button } from &quot;element-ui&quot;;
 
+  components: {
+      [Button.name]: Button,
+    }
 
-     &lt;el-pagination class=&quot;pagination&quot; :pageSize=&quot;pageSize&quot; background layout=&quot;prev, pager, next&quot; :total=&quot;total&quot; @current-change=&quot;handelchange&quot;&gt;&lt;/el-pagination&gt;</code></pre><ul><li>这里面的组件包含很多属性，pageSize就是页面的大小可以包含几条数据，total表示总数据，注意属性的调用可能有驼峰命名法，比如文档中调用属性page-size会出错，你要改成pageSize</li><li>current-change是事件名称，page页改变的时候会触发，回调参数是当前页数</li></ul><pre><code>     //点击触发事件，会有一个回调参数，这个回调参数就是当前的页数
-        handelchange(pageNum){
-          this.pageNum = pageNum
-          this.getOrderList()
-        }</code></pre><h2 id="加载更多"><a href="#加载更多" class="headerlink" title="加载更多"></a>加载更多</h2><h3 id="Button组件"><a href="#Button组件" class="headerlink" title="Button组件"></a>Button组件</h3><ul><li>点击Button组件会加载更多数据</li></ul><h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><ul><li>组件的loading属性是显示加载loading的，需要动态绑定，在加载时显示，加载完成后关闭，绑定到getOrderList</li></ul><pre><code>    import { Button } from &quot;element-ui&quot;;
-
-    components: {
-        [Button.name]: Button,
-      }
-
-    &lt;el-button type=&quot;primary&quot; :loading=&quot;loading&quot; @click=&quot;loadMore&quot;&gt;加载更多&lt;/el-button&gt;</code></pre><ul><li>loadMore事件是加载更多</li></ul><pre><code>    loadMore(){
-          this.pageNum++    //每点击一次页数加1
-          this.getOrderList()
-        }</code></pre><ul><li>我们发现返回的数据没有拼接，只有请求的到数据，我们要把它拼接</li></ul><pre><code>    this.list = this.list.concat(res.list);   //把返回的数据拼接到一起</code></pre><h2 id="滚动加载"><a href="#滚动加载" class="headerlink" title="滚动加载"></a>滚动加载</h2><ul><li>开发中总会遇到这种下拉加载的设计方案，Vue实现下拉加载最佳方案自然是使用vue-infinite-scroll来实现。接下来我们一起看下它的配置及使用方式。</li></ul><h3 id="首先我们先了解下他的配置参数："><a href="#首先我们先了解下他的配置参数：" class="headerlink" title="首先我们先了解下他的配置参数："></a>首先我们先了解下他的配置参数：</h3><ul><li>v-infinite-scroll=”loadMore”表示回调函数是loadMore</li><li>infinite-scroll-disabled=”busy”表示由变量busy决定是否执行loadMore，false则执行loadMore，true则不执行，注意，busy表示繁忙，繁忙的时候是不执行的。</li><li>infinite-scroll-distance=”10”这里10决定了页面滚动到离页尾多少像素的时候触发回调函数，10是像素值。一般情况下会在页尾做一个几十像素高的“正在加载中…”，这样的话，可以把这个div的高度设为infinite-scroll-distance的值即可。</li><li>infinite-scroll-immediate-check 默认值为true，该指令表示，应该在绑定后立即检查busy的值和是否滚动到底。假如你的初始内容高度不够，不足以填满可滚动的容器的话，你应设为true，这样会立即执行一次loadMore，会帮你填充一些初始内容。</li><li>infinite-scroll-listen-for-event 当事件在Vue实例中发出时，无限滚动将再次检查。</li><li>infinite-scroll-throttle-delay 检查busy的值的时间间隔，默认值是200，因为vue-infinite-scroll的基础原理是，vue-infinite-scroll会循环检查busy的值，以及是否滚动到底，只有当：busy为false且滚动到底，回调函数才会执行</li></ul><h3 id="安装vue-infinite-scroll"><a href="#安装vue-infinite-scroll" class="headerlink" title="安装vue-infinite-scroll"></a>安装vue-infinite-scroll</h3><pre><code>    npm install vue-infinite-scroll --save</code></pre><h3 id="引入-vue-infinite-scroll"><a href="#引入-vue-infinite-scroll" class="headerlink" title="引入 vue-infinite-scroll"></a>引入 vue-infinite-scroll</h3><ul><li>全局引入</li></ul><pre><code>    // register globally（全局引入，在main.js中引入）
-    import infiniteScroll from &#39;vue-infinite-scroll&#39;
-    Vue.use(infiniteScroll)</code></pre><ul><li>局部引入</li></ul><pre><code>    // or for a single instance
-    import infiniteScroll from &#39;vue-infinite-scroll&#39;
-    new Vue({
-      directives: {infiniteScroll}
-    })</code></pre><h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><ul><li>首先需要引用插件，上面步骤，然后使用，img是加载动画，需要绑定一个loading动态加载</li></ul><pre><code>        &lt;div
-                v-show=&quot;loading&quot;
-                v-infinite-scroll=&quot;loadMore&quot;
-                infinite-scroll-disabled=&quot;busy&quot;
-                infinite-scroll-distance=&quot;410&quot;
-              &gt;
-              &lt;img src=&quot;/imgs/loading-svg/loading-spinning-bubbles.svg&quot; alt=&quot;&quot;&gt;&lt;/div&gt;
-            &lt;/div&gt;
-
-
-
-            loadMore(){
-          this.busy = true
-          setTimeout(()=&gt;{
-            this.pageNum++
-            this.getList()
-          },500)
-        },
-        getList() {
-          this.loading = true
-          this.axios
-            .get(&quot;/orders&quot;, {
-              params: {
-                pageSize: 5,
-                pageNum: this.pageNum
-              }
-            })
-            .then(res =&gt; {
-              this.list = this.list.concat(res.list);   //拼接
-              if(res.hasNextPage){    
-                this.busy = false
-              }else{
-                this.busy = true  //如果没有下一页，就禁止掉，下拉将没用，动画也不再显示
-                this.loading = false
-              }
-            })
-        },</code></pre></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者:</i></span> <span class="reprint-info"><a href="/about" rel="external nofollow noreferrer">阿华</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接:</i></span> <span class="reprint-info"><a href="https://lhz520.top/2020/05/18/fen-ye/">https://lhz520.top/2020/05/18/fen-ye/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明:</i></span> <span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="/about" target="_blank">阿华</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
+  &lt;el-button type=&quot;primary&quot; :loading=&quot;loading&quot; @click=&quot;loadMore&quot;&gt;加载更多&lt;/el-button&gt;</code></pre></li><li><p>loadMore事件是加载更多</p><pre><code>  loadMore(){
+        this.pageNum++    //每点击一次页数加1
+        this.getOrderList()
+      }</code></pre></li><li><p>我们发现返回的数据没有拼接，只有请求的到数据，我们要把它拼接</p><pre><code>  this.list = this.list.concat(res.list);   //把返回的数据拼接到一起</code></pre></li></ul><h2 id="滚动加载"><a href="#滚动加载" class="headerlink" title="滚动加载"></a>滚动加载</h2><ul><li>开发中总会遇到这种下拉加载的设计方案，Vue实现下拉加载最佳方案自然是使用vue-infinite-scroll来实现。接下来我们一起看下它的配置及使用方式。</li></ul><h3 id="首先我们先了解下他的配置参数："><a href="#首先我们先了解下他的配置参数：" class="headerlink" title="首先我们先了解下他的配置参数："></a>首先我们先了解下他的配置参数：</h3><ul><li>v-infinite-scroll=”loadMore”表示回调函数是loadMore</li><li>infinite-scroll-disabled=”busy”表示由变量busy决定是否执行loadMore，false则执行loadMore，true则不执行，注意，busy表示繁忙，繁忙的时候是不执行的。</li><li>infinite-scroll-distance=”10”这里10决定了页面滚动到离页尾多少像素的时候触发回调函数，10是像素值。一般情况下会在页尾做一个几十像素高的“正在加载中…”，这样的话，可以把这个div的高度设为infinite-scroll-distance的值即可。</li><li>infinite-scroll-immediate-check 默认值为true，该指令表示，应该在绑定后立即检查busy的值和是否滚动到底。假如你的初始内容高度不够，不足以填满可滚动的容器的话，你应设为true，这样会立即执行一次loadMore，会帮你填充一些初始内容。</li><li>infinite-scroll-listen-for-event 当事件在Vue实例中发出时，无限滚动将再次检查。</li><li>infinite-scroll-throttle-delay 检查busy的值的时间间隔，默认值是200，因为vue-infinite-scroll的基础原理是，vue-infinite-scroll会循环检查busy的值，以及是否滚动到底，只有当：busy为false且滚动到底，回调函数才会执行</li></ul><h3 id="安装vue-infinite-scroll"><a href="#安装vue-infinite-scroll" class="headerlink" title="安装vue-infinite-scroll"></a>安装vue-infinite-scroll</h3><pre><code>    npm install vue-infinite-scroll --save</code></pre><h3 id="引入-vue-infinite-scroll"><a href="#引入-vue-infinite-scroll" class="headerlink" title="引入 vue-infinite-scroll"></a>引入 vue-infinite-scroll</h3><ul><li><p>全局引入</p><pre><code>  // register globally（全局引入，在main.js中引入）
+  import infiniteScroll from &#39;vue-infinite-scroll&#39;
+  Vue.use(infiniteScroll)</code></pre></li><li><p>局部引入</p><pre><code>  // or for a single instance
+  import infiniteScroll from &#39;vue-infinite-scroll&#39;
+  new Vue({
+    directives: {infiniteScroll}
+  })</code></pre></li></ul><h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><ul><li><p>首先需要引用插件，上面步骤，然后使用，img是加载动画，需要绑定一个loading动态加载</p><pre><code>      &lt;div
+              v-show=&quot;loading&quot;
+              v-infinite-scroll=&quot;loadMore&quot;
+              infinite-scroll-disabled=&quot;busy&quot;
+              infinite-scroll-distance=&quot;410&quot;
+            &gt;
+            &lt;img src=&quot;/imgs/loading-svg/loading-spinning-bubbles.svg&quot; alt=&quot;&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;</code></pre></li></ul><ul><li><p>触发事件，下拉都一定程度就会触发</p><pre><code>          loadMore(){
+        this.busy = true      //触发事件后busy繁忙
+        setTimeout(()=&gt;{      //防止频繁触发事件，设置0.5秒延迟
+          this.pageNum++
+          this.getList()
+        },500)
+      },
+      getList() {
+        this.loading = true
+        this.axios
+          .get(&quot;/orders&quot;, {
+            params: {
+              pageSize: 5,
+              pageNum: this.pageNum
+            }
+          })
+          .then(res =&gt; {
+            this.list = this.list.concat(res.list);   //拼接
+            if(res.hasNextPage){    
+              this.busy = false
+            }else{
+              this.busy = true  //如果没有下一页，就禁止掉，下拉将没用，动画也不再显示
+              this.loading = false
+            }
+          })
+      },</code></pre></li></ul></div><hr><div class="reprint" id="reprint-statement"><div class="reprint__author"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-user">文章作者:</i></span> <span class="reprint-info"><a href="/about" rel="external nofollow noreferrer">阿华</a></span></div><div class="reprint__type"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-link">文章链接:</i></span> <span class="reprint-info"><a href="https://lhz520.top/2020/05/18/fen-ye/">https://lhz520.top/2020/05/18/fen-ye/</a></span></div><div class="reprint__notice"><span class="reprint-meta" style="font-weight:700"><i class="fas fa-copyright">版权声明:</i></span> <span class="reprint-info">本博客所有文章除特別声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a> 许可协议。转载请注明来源 <a href="/about" target="_blank">阿华</a> !</span></div></div><script async defer>document.addEventListener("copy", function (e) {
         let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
         M.toast({html: toastHTML})
       });
@@ -154,4 +147,4 @@
             fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
-    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:15px!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019</span> <a href="/about" target="_blank">叫我阿华就好了</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">17.5k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次</span> <span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><span id="sitetime">载入运行时间...</span><script>function siteTime(){var e=36e5,t=24*e,n=new Date,o="2019",r=n.getFullYear(),a=n.getMonth()+1,i=n.getDate(),l=n.getHours(),m=n.getMinutes(),M=n.getSeconds(),g=Date.UTC(o,"6","28","0","0","0"),d=Date.UTC(r,a,i,l,m,M)-g,s=Math.floor(d/31536e6),u=Math.floor(d/t-365*s),T=Math.floor((d-(365*s+u)*t)/e),c=Math.floor((d-(365*s+u)*t-T*e)/6e4),f=Math.floor((d-(365*s+u)*t-T*e-6e4*c)/1e3);o==r?(document.getElementById("year").innerHTML=r,document.getElementById("sitetime").innerHTML="本站已安全运行 "+u+" 天 "+T+" 小时 "+c+" 分钟 "+f+" 秒"):(document.getElementById("year").innerHTML=o+" - "+r,document.getElementById("sitetime").innerHTML="本站已安全运行 "+s+" 年 "+u+" 天 "+T+" 小时 "+c+" 分钟 "+f+" 秒")}setInterval(siteTime,1e3)</script><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/lhzjoker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i></a><a href="mailto:2313169248@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i></a><a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2313169248" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2313169248" data-position="top" data-delay="50"><i class="fab fa-qq"></i></a><a href="/medias/wechat.jpg" class="tooltipped" target="_blank" data-tooltip="微信联系我: /medias/wechat.jpg" data-position="top" data-delay="50"><i class="fab fa-weixin"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i> &nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/js/search.js"></script><script>$(function(){searchFunc("https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/materialize/materialize.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/masonry/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/aos/aos.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/scrollprogress/scrollProgress.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/js/matery.js"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/others/clicklove.js" async></script><script async src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/others/busuanzi.pure.mini.js"></script><script size="150" alpha="0.6" zindex="-1" src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/background/ribbon-refresh.min.js" async></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/background/ribbon-dynamic.js" async></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/instantpage/instantpage.js" type="module"></script><script src="/js/sakura.js"></script><script>window.imageLazyLoadSetting={isSPA:!1,processImages:null}</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})})</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var a=0;a<r.length;a++)0<=(t=r[a].getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight+240||document.documentElement.clientHeight+240)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e()},n.src=i}();var t}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this)</script></body></html>
+    });</script></main><footer class="page-footer bg-color"><div class="container row center-align" style="margin-bottom:15px!important"><div class="col s12 m8 l8 copy-right">Copyright&nbsp;&copy; <span id="year">2019</span> <a href="/about" target="_blank">叫我阿华就好了</a> |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a> |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a><br>&nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">17.6k</span>&nbsp;字 <span id="busuanzi_container_site_pv">|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次</span> <span id="busuanzi_container_site_uv">|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人</span><br><span id="sitetime">载入运行时间...</span><script>function siteTime(){var e=36e5,t=24*e,n=new Date,o="2019",r=n.getFullYear(),a=n.getMonth()+1,i=n.getDate(),l=n.getHours(),m=n.getMinutes(),M=n.getSeconds(),g=Date.UTC(o,"6","28","0","0","0"),d=Date.UTC(r,a,i,l,m,M)-g,s=Math.floor(d/31536e6),u=Math.floor(d/t-365*s),T=Math.floor((d-(365*s+u)*t)/e),c=Math.floor((d-(365*s+u)*t-T*e)/6e4),f=Math.floor((d-(365*s+u)*t-T*e-6e4*c)/1e3);o==r?(document.getElementById("year").innerHTML=r,document.getElementById("sitetime").innerHTML="本站已安全运行 "+u+" 天 "+T+" 小时 "+c+" 分钟 "+f+" 秒"):(document.getElementById("year").innerHTML=o+" - "+r,document.getElementById("sitetime").innerHTML="本站已安全运行 "+s+" 年 "+u+" 天 "+T+" 小时 "+c+" 分钟 "+f+" 秒")}setInterval(siteTime,1e3)</script><br></div><div class="col s12 m4 l4 social-link social-statis"><a href="https://github.com/lhzjoker" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50"><i class="fab fa-github"></i></a><a href="mailto:2313169248@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50"><i class="fas fa-envelope-open"></i></a><a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2313169248" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2313169248" data-position="top" data-delay="50"><i class="fab fa-qq"></i></a><a href="/medias/wechat.jpg" class="tooltipped" target="_blank" data-tooltip="微信联系我: /medias/wechat.jpg" data-position="top" data-delay="50"><i class="fab fa-weixin"></i></a></div></div></footer><div class="progress-bar"></div><div id="searchModal" class="modal"><div class="modal-content"><div class="search-header"><span class="title"><i class="fas fa-search"></i> &nbsp;&nbsp;搜索</span> <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input"></div><div id="searchResult"></div></div></div><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/js/search.js"></script><script>$(function(){searchFunc("https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/search.xml","searchInput","searchResult")})</script><div id="backTop" class="top-scroll"><a class="btn-floating btn-large waves-effect waves-light" href="#!"><i class="fas fa-arrow-up"></i></a></div><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/materialize/materialize.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/masonry/masonry.pkgd.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/aos/aos.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/scrollprogress/scrollProgress.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/js/matery.js"></script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/others/clicklove.js" async></script><script async src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/others/busuanzi.pure.mini.js"></script><script size="150" alpha="0.6" zindex="-1" src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/background/ribbon-refresh.min.js" async></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/background/ribbon-dynamic.js" async></script><script src="https://cdn.jsdelivr.net/gh/lhzjoker/lhzjoker.github.io/libs/instantpage/instantpage.js" type="module"></script><script src="/js/sakura.js"></script><script>window.imageLazyLoadSetting={isSPA:!1,processImages:null}</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})})</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var a=0;a<r.length;a++)0<=(t=r[a].getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight+240||document.documentElement.clientHeight+240)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e()},n.src=i}();var t}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this)</script></body></html>
