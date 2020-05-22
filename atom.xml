@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-05-22T02:38:00.720Z</updated>
+  <updated>2020-05-22T16:19:51.065Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mybatis三剑客</title>
+    <link href="https://lhz520.top/2020/05/23/mybatis-san-jian-ke/"/>
+    <id>https://lhz520.top/2020/05/23/mybatis-san-jian-ke/</id>
+    <published>2020-05-22T16:17:23.000Z</published>
+    <updated>2020-05-22T16:19:51.065Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://lhz520.top/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://lhz520.top/tags/java/"/>
+    
+      <category term="springboot" scheme="https://lhz520.top/tags/springboot/"/>
+    
+      <category term="mybatis" scheme="https://lhz520.top/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Mybatis的使用</title>
     <link href="https://lhz520.top/2020/05/22/mybatis/"/>
     <id>https://lhz520.top/2020/05/22/mybatis/</id>
     <published>2020-05-21T16:43:56.123Z</published>
-    <updated>2020-05-22T02:38:00.720Z</updated>
+    <updated>2020-05-22T16:17:11.603Z</updated>
     
     <summary type="html">
     
