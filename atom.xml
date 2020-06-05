@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-05-22T16:23:01.181Z</updated>
+  <updated>2020-06-05T04:20:32.429Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue-router路由</title>
+    <link href="https://lhz520.top/2020/06/05/vue-router/"/>
+    <id>https://lhz520.top/2020/06/05/vue-router/</id>
+    <published>2020-06-05T04:16:44.663Z</published>
+    <updated>2020-06-05T04:20:32.429Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js
+        
+      
+    
+    </summary>
+    
+    
+      <category term="vue" scheme="https://lhz520.top/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="https://lhz520.top/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>Mybatis三剑客</title>
