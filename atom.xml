@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-06-05T04:20:32.429Z</updated>
+  <updated>2020-06-12T14:46:39.578Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis的引入和具体使用方法，还有服务器部署</title>
+    <link href="https://lhz520.top/2020/06/12/redis/"/>
+    <id>https://lhz520.top/2020/06/12/redis/</id>
+    <published>2020-06-12T14:43:54.580Z</published>
+    <updated>2020-06-12T14:46:39.578Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这些都是redis的具体使用方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;redis&quot;&gt;&lt;a href=&quot;#redis&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="nosql" scheme="https://lhz520.top/categories/nosql/"/>
+    
+    
+      <category term="redis" scheme="https://lhz520.top/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>vue-router路由</title>
@@ -48,7 +78,7 @@
     <link href="https://lhz520.top/2020/05/23/mybatis-san-jian-ke/"/>
     <id>https://lhz520.top/2020/05/23/mybatis-san-jian-ke/</id>
     <published>2020-05-22T16:17:23.000Z</published>
-    <updated>2020-05-22T16:23:01.181Z</updated>
+    <updated>2020-06-12T14:47:28.747Z</updated>
     
     <summary type="html">
     
@@ -79,7 +109,7 @@
     <link href="https://lhz520.top/2020/05/22/mybatis/"/>
     <id>https://lhz520.top/2020/05/22/mybatis/</id>
     <published>2020-05-21T16:43:56.123Z</published>
-    <updated>2020-05-22T16:17:11.603Z</updated>
+    <updated>2020-06-12T14:46:24.995Z</updated>
     
     <summary type="html">
     
