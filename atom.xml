@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-06-12T14:46:39.578Z</updated>
+  <updated>2020-06-13T06:30:26.498Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>axios</title>
+    <link href="https://lhz520.top/2020/06/13/axios/"/>
+    <id>https://lhz520.top/2020/06/13/axios/</id>
+    <published>2020-06-13T06:29:32.302Z</published>
+    <updated>2020-06-13T06:30:26.498Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;axios-简介&quot;&gt;&lt;a href=&quot;#axios-简介&quot; class=&quot;headerlink&quot; title=&quot;axios 简介&quot;&gt;&lt;/a&gt;axios 简介&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;axios是网络请求封装的框架，axios 是一个基于Promise
+        
+      
+    
+    </summary>
+    
+    
+      <category term="vue" scheme="https://lhz520.top/categories/vue/"/>
+    
+    
+      <category term="axios" scheme="https://lhz520.top/tags/axios/"/>
+    
+  </entry>
   
   <entry>
     <title>redis的引入和具体使用方法，还有服务器部署</title>
