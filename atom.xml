@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-06-13T06:39:23.729Z</updated>
+  <updated>2020-06-24T02:33:24.366Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>阿里云服务器(centos7.7)上配置java，nginx，mysql，redis环境，并上传前端项目，运行java项目</title>
+    <link href="https://lhz520.top/2020/06/24/a-li-yun-fu-wu-qi/"/>
+    <id>https://lhz520.top/2020/06/24/a-li-yun-fu-wu-qi/</id>
+    <published>2020-06-24T02:31:08.281Z</published>
+    <updated>2020-06-24T02:33:24.366Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这是我在阿里云服务器上面做环境配置时做的笔记&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;centos下安装mysql5-7&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="服务器(centos7.7)" scheme="https://lhz520.top/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8-centos7-7/"/>
+    
+    
+      <category term="java" scheme="https://lhz520.top/tags/java/"/>
+    
+      <category term="redis" scheme="https://lhz520.top/tags/redis/"/>
+    
+      <category term="mysql" scheme="https://lhz520.top/tags/mysql/"/>
+    
+      <category term="nginx" scheme="https://lhz520.top/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>vuex</title>
