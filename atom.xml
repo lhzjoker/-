@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-06-24T02:33:24.366Z</updated>
+  <updated>2020-06-29T02:34:37.767Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机网络</title>
+    <link href="https://lhz520.top/2020/06/29/mian-shi-ji-suan-ji-wang-luo-zhi-shi/"/>
+    <id>https://lhz520.top/2020/06/29/mian-shi-ji-suan-ji-wang-luo-zhi-shi/</id>
+    <published>2020-06-29T02:32:39.028Z</published>
+    <updated>2020-06-29T02:34:37.767Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;此文章用来记录面试中计算机网络的一些核心问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;TCP的三次握手&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="https://lhz520.top/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+      <category term="计算机网络" scheme="https://lhz520.top/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>阿里云服务器(centos7.7)上配置java，nginx，mysql，redis环境，并上传前端项目，运行java项目</title>
