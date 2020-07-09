@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-07-07T15:32:26.807Z</updated>
+  <updated>2020-07-09T17:18:36.762Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java反射</title>
+    <link href="https://lhz520.top/2020/07/10/java-fan-she/"/>
+    <id>https://lhz520.top/2020/07/10/java-fan-she/</id>
+    <published>2020-07-09T17:16:59.724Z</published>
+    <updated>2020-07-09T17:18:36.762Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;此文章用来记录java反射的用途和基本用法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;java反射&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://lhz520.top/categories/java/"/>
+    
+    
+      <category term="java反射" scheme="https://lhz520.top/tags/java%E5%8F%8D%E5%B0%84/"/>
+    
+  </entry>
   
   <entry>
     <title>数据库</title>
@@ -568,33 +598,6 @@
     
     
       <category term="springboot高级缓存" scheme="https://lhz520.top/tags/springboot%E9%AB%98%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springboot jdbc</title>
-    <link href="https://lhz520.top/2020/01/13/springboot-lian-jie-jdbc/"/>
-    <id>https://lhz520.top/2020/01/13/springboot-lian-jie-jdbc/</id>
-    <published>2020-01-13T15:51:58.911Z</published>
-    <updated>2020-05-12T08:06:21.720Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;springboot连接jdbc数据库并且整合Druid数据源&quot;&gt;&lt;a href=&quot;#springboot连接jdbc数据库并且整合Druid数据源&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="springboot" scheme="https://lhz520.top/categories/springboot/"/>
-    
-    
-      <category term="springboot jdbc" scheme="https://lhz520.top/tags/springboot-jdbc/"/>
     
   </entry>
   
