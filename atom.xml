@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-07-13T02:39:17.449Z</updated>
+  <updated>2020-07-13T04:26:01.026Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -17,26 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>面试-GC垃圾回收机制</title>
+    <title>GC垃圾回收机制</title>
     <link href="https://lhz520.top/2020/07/13/mian-shi-gc-la-ji-hui-shou-ji-zhi/"/>
     <id>https://lhz520.top/2020/07/13/mian-shi-gc-la-ji-hui-shou-ji-zhi/</id>
     <published>2020-07-13T02:39:17.449Z</published>
-    <updated>2020-07-13T02:39:17.449Z</updated>
+    <updated>2020-07-13T04:26:01.026Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本篇主要记录java垃圾回收机制的一些主要面试问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;java垃圾回收机制&quot;&gt;&lt;a
+        
+      
     
     </summary>
     
     
+      <category term="java" scheme="https://lhz520.top/categories/java/"/>
+    
+    
+      <category term="jvm" scheme="https://lhz520.top/tags/jvm/"/>
     
   </entry>
   
   <entry>
-    <title>数据库</title>
+    <title>jvm</title>
     <link href="https://lhz520.top/2020/07/13/mian-shi-jvm/"/>
     <id>https://lhz520.top/2020/07/13/mian-shi-jvm/</id>
     <published>2020-07-13T02:38:54.707Z</published>
-    <updated>2020-07-13T03:59:12.763Z</updated>
+    <updated>2020-07-13T04:25:33.190Z</updated>
     
     <summary type="html">
     
