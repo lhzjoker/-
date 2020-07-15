@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-07-14T04:01:49.339Z</updated>
+  <updated>2020-07-15T15:26:44.648Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试常考的Redis知识</title>
+    <link href="https://lhz520.top/2020/07/15/mian-shi-redis/"/>
+    <id>https://lhz520.top/2020/07/15/mian-shi-redis/</id>
+    <published>2020-07-15T15:18:59.176Z</published>
+    <updated>2020-07-15T15:26:44.648Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这些都是面试中可能会被问到的一些关于Redis的问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;主流应用架构&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="redis" scheme="https://lhz520.top/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="https://lhz520.top/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>GC垃圾回收机制</title>
@@ -577,33 +607,6 @@
       <category term="element-ui" scheme="https://lhz520.top/tags/element-ui/"/>
     
       <category term="vue" scheme="https://lhz520.top/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>springboot安全（spring security）</title>
-    <link href="https://lhz520.top/2020/02/14/springboot-yu-an-quan/"/>
-    <id>https://lhz520.top/2020/02/14/springboot-yu-an-quan/</id>
-    <published>2020-02-14T08:11:04.236Z</published>
-    <updated>2020-05-12T08:05:35.606Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;SpringBoot与安全（spring-security）&quot;&gt;&lt;a href=&quot;#SpringBoot与安全（spring-security）&quot; class=&quot;headerlink&quot; title=&quot;SpringBoot与安全（spring
-        
-      
-    
-    </summary>
-    
-    
-      <category term="springboot" scheme="https://lhz520.top/categories/springboot/"/>
-    
-    
-      <category term="springboot安全" scheme="https://lhz520.top/tags/springboot%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
