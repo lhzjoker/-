@@ -44,11 +44,11 @@
   </entry>
   
   <entry>
-    <title>面试-Redis</title>
+    <title>面试常考的Redis知识</title>
     <link href="https://lhz520.top/2020/07/15/mian-shi-redis/"/>
     <id>https://lhz520.top/2020/07/15/mian-shi-redis/</id>
     <published>2020-07-15T15:18:59.176Z</published>
-    <updated>2020-07-19T08:50:06.778Z</updated>
+    <updated>2020-07-19T08:53:11.151Z</updated>
     
     <summary type="html">
     
@@ -66,6 +66,10 @@
     </summary>
     
     
+      <category term="redis" scheme="https://lhz520.top/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="https://lhz520.top/tags/redis/"/>
     
   </entry>
   
