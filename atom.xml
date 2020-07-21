@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lhz520.top/"/>
-  <updated>2020-07-19T08:43:23.941Z</updated>
+  <updated>2020-07-21T07:39:36.353Z</updated>
   <id>https://lhz520.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux常用命令</title>
+    <link href="https://lhz520.top/2020/07/21/linux-chang-yong-ming-ling/"/>
+    <id>https://lhz520.top/2020/07/21/linux-chang-yong-ming-ling/</id>
+    <published>2020-07-21T07:38:43.057Z</published>
+    <updated>2020-07-21T07:39:36.353Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;此文记录一些常用的linux命令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;常用命令（重要）&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://lhz520.top/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https://lhz520.top/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>java多线程，并发</title>
@@ -565,36 +595,6 @@
 &lt;li&gt;这是我学习vue一段时间后，上手脚手架，做的一些笔记&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;什么是脚手架&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="vue" scheme="https://lhz520.top/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://lhz520.top/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习vue的时候，做的一些笔记</title>
-    <link href="https://lhz520.top/2020/05/12/vue/"/>
-    <id>https://lhz520.top/2020/05/12/vue/</id>
-    <published>2020-05-12T07:37:57.508Z</published>
-    <updated>2020-05-13T03:30:47.791Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文主要讲述学习vue时的一些指令&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot;
         
       
     
